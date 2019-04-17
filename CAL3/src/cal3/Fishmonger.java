@@ -9,6 +9,6 @@ package cal3;
  *
  * @author Sergio
  */
-public class Fishmonger {
+public class Fishmonger extends Thread{
     
 }

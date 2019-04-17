@@ -5,10 +5,21 @@
  */
 package cal3;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author Sergio
  */
 public class Supermarket {
+    Monitor monitor;
+    Semaphore semOutsideQueue;
+    Semaphore semButcherQueue;
+    Semaphore semFishmongerQueue;
+    Semaphore semCheckAreaQueue;
     
+    public Supermarket(Monitor monitor)
+    {
+        this.monitor = monitor;
+    }
 }

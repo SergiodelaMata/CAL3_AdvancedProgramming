@@ -13,7 +13,7 @@ import javax.swing.JTextField;
  * @author Sergio
  */
 public class Queue {
-    ArrayList<Buyer> queue = new ArrayList<Buyer>();
+    ArrayList<String> queue = new ArrayList<String>();
     private int numBuyers;
     private int totalBuyers;
     private JTextField text;
@@ -26,9 +26,35 @@ public class Queue {
         this.totalBuyers = 0;
     }
     
-    //longitud
-    //modificar numero de clientes
-    //modificar numero de clientes totales
-    //
+    public synchronized void push(String id)//To add an element to a queue
+    {
+        queue.add(id);
+        this.print();
+    }
+    public synchronized void pop(String id)//To eliminate an element of a queue
+    {
+        for(int i = 0; i < queue.size(); i++)
+        {
+            if(queue.get(i) == id)
+            {
+                queue.remove(i);
+            }
+        }
+        this.print();
+    }
     
+    public void print()//To show the result of a queue in an instant of time at their User Interface
+    {
+        String textVisitors = " ";
+        for(int i = 0; i < queue.size(); i++)
+        {
+            textVisitors=textVisitors + " " + queue.get(i);
+        }
+        text.setText(textVisitors);
+    }
+    
+    public int lengthQueue()//To get the actual length of a queue
+    {
+        return queue.size();
+    }    
 }

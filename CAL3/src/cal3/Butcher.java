@@ -9,6 +9,6 @@ package cal3;
  *
  * @author Sergio
  */
-public class Butcher {
+public class Butcher extends Thread{
     
 }

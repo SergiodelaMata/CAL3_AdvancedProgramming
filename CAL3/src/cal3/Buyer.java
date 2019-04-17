@@ -9,6 +9,21 @@ package cal3;
  *
  * @author Sergio
  */
-public class Buyer {
+public class Buyer extends Thread{
+    String idBuyer;
+    Supermarket supermarket;
+    Monitor monitor;
+
+    public Buyer(String idBuyer, Monitor monitor, Supermarket supermarket) {
+        this.idBuyer = idBuyer;
+        this.monitor = monitor;
+        this.supermarket = supermarket;
+        this.run();
+    }
+    
+    public void run()
+    {
+        
+    }
     
 }

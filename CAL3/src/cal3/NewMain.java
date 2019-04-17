@@ -10,12 +10,15 @@ package cal3;
  * @author Sergio
  */
 public class NewMain extends javax.swing.JFrame {
-
     /**
-     * Creates new form ServerInterface
+     * @param args the command line arguments
      */
+    Supermarket supermarket;
+    Monitor monitor = new Monitor();
+    int counter = 1;
     public NewMain() {
         initComponents();
+        
     }
 
     /**

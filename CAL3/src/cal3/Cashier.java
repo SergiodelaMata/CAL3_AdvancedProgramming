@@ -9,6 +9,6 @@ package cal3;
  *
  * @author Sergio
  */
-public class Cashier {
+public class Cashier extends Thread{
     
 }
