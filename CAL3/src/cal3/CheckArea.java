@@ -5,10 +5,18 @@
  */
 package cal3;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Sergio
  */
 public class CheckArea {
+    Queue payQueue;
+
+    public CheckArea(Monitor monitor, JTextField text) {
+        this.payQueue = new Queue(text, monitor);
+    }
+    
     
 }

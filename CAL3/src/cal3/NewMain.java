@@ -18,7 +18,19 @@ public class NewMain extends javax.swing.JFrame {
     int counter = 1;
     public NewMain() {
         initComponents();
-        
+        supermarket = new Supermarket(jTextFieldAttendingBuyerButcher, jTextFieldAttendingBuyerFishmonger, jTextFieldButcherShopQueue, jTextFieldFishShopQueue, jTextFieldBuyersShelves, jTextFieldCashier1AttendingBuyer, jTextFieldCashier2AttendingBuyer, jTextFieldCheckAreaQueue, jTextFieldOusideQueue, monitor);
+        while(counter < 20000)
+        {
+            if(!monitor.isStopThread())
+            {
+                Buyer buyer = new Buyer("Buyer " + counter, monitor, supermarket);
+                counter++;
+            }
+            else
+            {
+                monitor.waitResume();
+            }
+        }
     }
 
     /**
