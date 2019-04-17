@@ -19,4 +19,9 @@ public class CheckArea {
     }
     
     
+    public int lengthCheckArea()
+    {
+        return payQueue.lengthQueue();
+    }
+    
 }

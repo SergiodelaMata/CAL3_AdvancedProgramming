@@ -36,7 +36,14 @@ public class Supermarket {
     
     public void enterSupermaret(String idBuyer)
     {
-        
+        outsideQueue.push(idBuyer);
+        try
+        {
+            semOutsideQueue.acquire();
+        }
+        catch(Exception e)
+        {}
+        outsideQueue.pop(idBuyer);
         
         if(monitor.isStopThread())
         {
