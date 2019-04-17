@@ -44,7 +44,7 @@ public class Supermarket {
         }
     }
     
-    public void exitSupermaret(String idBuyer)
+    public void exitSupermarket(String idBuyer)
     {
         
         if(monitor.isStopThread())

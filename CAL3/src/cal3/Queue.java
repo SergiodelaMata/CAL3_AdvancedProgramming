@@ -56,5 +56,14 @@ public class Queue {
     public int lengthQueue()//To get the actual length of a queue
     {
         return queue.size();
-    }    
+    }
+
+    public void cleanQueue() //Makes the buyers leave the queue
+    {
+        for(int i = 0; i < queue.size(); i++)
+        {
+            queue.remove(0);
+        }
+    }
+    
 }

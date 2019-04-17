@@ -69,24 +69,6 @@ public class NewMain extends javax.swing.JFrame {
         jLabelOutsideQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelOutsideQueue.setText("People waiting to enter into the supermarket:");
 
-        jTextFieldOusideQueue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldOusideQueueActionPerformed(evt);
-            }
-        });
-
-        jTextFieldButcherShopQueue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldButcherShopQueueActionPerformed(evt);
-            }
-        });
-
-        jTextFieldFishShopQueue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldFishShopQueueActionPerformed(evt);
-            }
-        });
-
         jLabelOutsideQueueButcherShopQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelOutsideQueueButcherShopQueue.setText("People waiting at the butcher shop:");
 
@@ -96,56 +78,20 @@ public class NewMain extends javax.swing.JFrame {
         jLabelAttendingBuyerButcher.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelAttendingBuyerButcher.setText("Butcher attending to:");
 
-        jTextFieldAttendingBuyerButcher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAttendingBuyerButcherActionPerformed(evt);
-            }
-        });
-
         jLabelAttendingBuyerFishmonger.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelAttendingBuyerFishmonger.setText("Fishmonger attending to:");
-
-        jTextFieldAttendingBuyerFishmonger.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAttendingBuyerFishmongerActionPerformed(evt);
-            }
-        });
 
         jLabelBuyersShelves.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelBuyersShelves.setText("People at the items shelves:");
 
-        jTextFieldBuyersShelves.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldBuyersShelvesActionPerformed(evt);
-            }
-        });
-
         jLabelCheckAreaQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCheckAreaQueue.setText("People waiting at the check area:");
-
-        jTextFieldCheckAreaQueue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCheckAreaQueueActionPerformed(evt);
-            }
-        });
 
         jLabelCashier1AttendingBuyer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCashier1AttendingBuyer.setText("Cashier 1 attending to:");
 
-        jTextFieldCashier1AttendingBuyer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCashier1AttendingBuyerActionPerformed(evt);
-            }
-        });
-
         jLabelCashier2AttendingBuyer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCashier2AttendingBuyer.setText("Cashier 2 attending to:");
-
-        jTextFieldCashier2AttendingBuyer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCashier2AttendingBuyerActionPerformed(evt);
-            }
-        });
 
         jLabelOutsideQueue9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelOutsideQueue9.setText("Supermarket");
@@ -277,47 +223,14 @@ public class NewMain extends javax.swing.JFrame {
 
     private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
+        monitor.setStopThread(true);
     }                                           
 
     private void jButtonResumeActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-    }                                             
-
-    private void jTextFieldOusideQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
-    }                                                     
-
-    private void jTextFieldButcherShopQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        // TODO add your handling code here:
-    }                                                          
-
-    private void jTextFieldFishShopQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
-    }                                                       
-
-    private void jTextFieldAttendingBuyerButcherActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-        // TODO add your handling code here:
-    }                                                               
-
-    private void jTextFieldAttendingBuyerFishmongerActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
-        // TODO add your handling code here:
-    }                                                                  
-
-    private void jTextFieldBuyersShelvesActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
-    }                                                       
-
-    private void jTextFieldCheckAreaQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
-    }                                                        
-
-    private void jTextFieldCashier1AttendingBuyerActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
-
-    private void jTextFieldCashier2AttendingBuyerActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
+        monitor.setStopThread(false);//It is changed the value of the shared variable to make the thread be active again
+        monitor.activeThread();//To active the thread again
+    }
 
     /**
      * @param args the command line arguments

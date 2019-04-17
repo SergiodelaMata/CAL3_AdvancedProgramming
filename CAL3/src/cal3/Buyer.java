@@ -23,7 +23,22 @@ public class Buyer extends Thread{
     
     public void run()
     {
-        
+        int randNumber = (int) (Math.random()*3);
+        supermarket.enterSupermaret(idBuyer);
+        if(randNumber == 0)
+        {
+            supermarket.goButcherShop(idBuyer);
+        }
+        else if(randNumber == 1)
+        {
+            supermarket.goFishShop(idBuyer);
+        }
+        else
+        {
+            supermarket.goItemShelves(idBuyer);
+        }
+        supermarket.payShopping(idBuyer);
+        supermarket.exitSupermarket(idBuyer);
     }
     
 }
