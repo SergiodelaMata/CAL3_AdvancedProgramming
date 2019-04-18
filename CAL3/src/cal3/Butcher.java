@@ -22,9 +22,10 @@ public class Butcher extends Thread{
     {
         this.butcherText = butcherText;
         this.butcherMonitor = butcherMonitor;
+        this.sem = sem;
     }
     
-    public void enter(String s)//To make the thread enter the different queues
+    public void enter(String s)//To make the thread enter the queue
     {
         butcherQueue.push(s);
         try
@@ -33,7 +34,7 @@ public class Butcher extends Thread{
         }
         catch(Exception e)
         {}
-        butcherQueue.pop(s);
+        butcherQueue.pop();
         //if(exhibitionState)
         //{
         butcherQueue.push(s);
@@ -44,7 +45,7 @@ public class Butcher extends Thread{
         }
     }
     
-    public void buyButcher(String s)//To be during a time in the Exhibition
+    public void buyButcher(String s)//Enter butcher´s
     {
         try {
             Thread.sleep(1500+(int) (2500*Math.random()));
@@ -57,7 +58,7 @@ public class Butcher extends Thread{
         {}
     }
     
-    public void exitButcher(int v)//To make the thread go out of the Exhibition
+    public void exitButcher()//To make the thread go out of the Exhibition
     {
         if(true)//supermarketstate
         {
@@ -71,5 +72,15 @@ public class Butcher extends Thread{
     
     public void run()
     {
+    	boolean a = false;
+    	
+    	while(a) {
+    		if (butcherMonitor.isStopButcher()){
+    			buyButcher(butcherQueue.pop());
+    			exitButcher();
+    		}
+    	}
+    	a = true;
+    	butcherMonitor.notifyAll();
     }
 }
