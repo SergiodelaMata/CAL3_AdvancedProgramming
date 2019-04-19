@@ -12,7 +12,7 @@ import javax.swing.JTextField;
  * @author Sergio
  */
 public class CheckArea {
-    Queue payQueue;
+    private Queue payQueue;
 
     public CheckArea(Monitor monitor, JTextField text) {
         this.payQueue = new Queue(text, monitor);
@@ -24,4 +24,13 @@ public class CheckArea {
         return payQueue.lengthQueue();
     }
     
+    public void push(String id)
+    {
+        payQueue.push(id);
+    }
+    
+    public void pop(String id)
+    {
+        payQueue.pop(id);
+    }
 }

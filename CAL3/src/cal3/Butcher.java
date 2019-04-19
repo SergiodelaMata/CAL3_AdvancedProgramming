@@ -34,10 +34,10 @@ public class Butcher extends Thread{
         }
         catch(Exception e)
         {}
-        butcherQueue.pop();
+        butcherQueue.pop(s);
         //if(exhibitionState)
         //{
-        butcherQueue.push(s);
+        butcherQueue.push(s);//?
         if(butcherMonitor.isStopThread())
         {
             butcherMonitor.waitResume();
@@ -45,7 +45,7 @@ public class Butcher extends Thread{
         }
     }
     
-    public void buyButcher(String s)//Enter butcher´s
+    public void buyButcher(String s)//Enter butcherÂ´s
     {
         try {
             Thread.sleep(1500+(int) (2500*Math.random()));
@@ -76,7 +76,7 @@ public class Butcher extends Thread{
     	
     	while(a) {
     		if (butcherMonitor.isStopButcher()){
-    			buyButcher(butcherQueue.pop());
+    			//buyButcher(butcherQueue.pop());//?
     			exitButcher();
     		}
     	}

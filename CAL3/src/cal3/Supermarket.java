@@ -5,6 +5,7 @@
  */
 package cal3;
 
+import static java.lang.Thread.sleep;
 import java.util.concurrent.Semaphore;
 import javax.swing.JTextField;
 
@@ -13,28 +14,25 @@ import javax.swing.JTextField;
  * @author Sergio
  */
 public class Supermarket {
-    Monitor monitor;
-    Semaphore semOutsideQueue;
-    Semaphore semButcherQueue;
-    Semaphore semFishmongerQueue;
-    Semaphore semCheckAreaQueue;
-    Queue outsideQueue, butcherQueue, fishmongerQueue;
-    CheckArea checkArea;
+    private Monitor monitor;
+    private Semaphore semOutsideQueue, semButcherQueue, semFishmongerQueue, semCheckAreaQueue;
+    private Queue outsideQueue, butcherQueue, fishmongerQueue;
+    private CheckArea checkArea;
     
-    public Supermarket(JTextField buyerButcher,JTextField buyerFishmonger,JTextField butcherQueue, JTextField fishmongerQueue, JTextField buyersShelves, JTextField buyerCashier1, JTextField buyerCashier2, JTextField checkAreaQueue, JTextField outsideQueue,Monitor monitor)
+    public Supermarket(JTextField buyerButcher,JTextField buyerFishmonger,JTextField butcherQueue, JTextField fishmongerQueue, JTextField buyersShelves, JTextField buyerCashier1, JTextField buyerCashier2, JTextField checkAreaQueue, JTextField outsideQueueField,Monitor monitor)
     {
         this.monitor = monitor;
         this.butcherQueue = new Queue(butcherQueue, monitor);
         this.fishmongerQueue = new Queue(fishmongerQueue, monitor);
-        this.outsideQueue = new Queue(outsideQueue, monitor);
+        this.outsideQueue = new Queue(outsideQueueField, monitor);
         this.checkArea = new CheckArea(monitor, checkAreaQueue);
-        this.semOutsideQueue = new Semaphore(20, true);
-        this.semButcherQueue = new Semaphore(1, true);
-        this.semFishmongerQueue = new Semaphore(1, true);
-        this.semCheckAreaQueue = new Semaphore(1, true);
+        this.semOutsideQueue = new Semaphore(20);
+        this.semButcherQueue = new Semaphore(1);
+        this.semFishmongerQueue = new Semaphore(1);
+        this.semCheckAreaQueue = new Semaphore(1);
     }
     
-    public void enterSupermaret(String idBuyer)
+    public void enterSupermarket(String idBuyer)
     {
         outsideQueue.push(idBuyer);
         try
@@ -51,18 +49,20 @@ public class Supermarket {
         }
     }
     
-    public void exitSupermarket(String idBuyer)
+    public synchronized void exitSupermarket(String idBuyer)
     {
         
         if(monitor.isStopThread())
         {
             monitor.waitResume();
         }
+        semOutsideQueue.release();
+        
     }
     
     public void payShopping(String idBuyer)
     {
-        
+        checkArea.pop(idBuyer);
         if(monitor.isStopThread())
         {
             monitor.waitResume();
@@ -75,6 +75,7 @@ public class Supermarket {
         {
             monitor.waitResume();
         }
+        checkArea.push(idBuyer);
     }
     
     public void goFishShop(String idBuyer)
@@ -83,6 +84,7 @@ public class Supermarket {
         {
             monitor.waitResume();
         }
+        checkArea.push(idBuyer);
     }
     
     public void goItemShelves(String idBuyer)
@@ -91,5 +93,6 @@ public class Supermarket {
         {
             monitor.waitResume();
         }
+        checkArea.push(idBuyer);
     }
 }

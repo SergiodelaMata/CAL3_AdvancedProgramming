@@ -18,13 +18,13 @@ public class Buyer extends Thread{
         this.idBuyer = idBuyer;
         this.monitor = monitor;
         this.supermarket = supermarket;
-        this.run();
+        this.start();
     }
     
     public void run()
     {
         int randNumber = (int) (Math.random()*3);
-        supermarket.enterSupermaret(idBuyer);
+        supermarket.enterSupermarket(idBuyer);
         if(randNumber == 0)
         {
             supermarket.goButcherShop(idBuyer);

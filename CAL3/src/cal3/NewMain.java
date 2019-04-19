@@ -13,17 +13,21 @@ public class NewMain extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    Buyer buyer;
     Supermarket supermarket;
     Monitor monitor = new Monitor();
     int counter = 1;
     public NewMain() {
         initComponents();
         supermarket = new Supermarket(jTextFieldAttendingBuyerButcher, jTextFieldAttendingBuyerFishmonger, jTextFieldButcherShopQueue, jTextFieldFishShopQueue, jTextFieldBuyersShelves, jTextFieldCashier1AttendingBuyer, jTextFieldCashier2AttendingBuyer, jTextFieldCheckAreaQueue, jTextFieldOusideQueue, monitor);
-        while(counter < 20000)
+        //System.out.println("Ready");
+        while(counter <= 40)
         {
+            //System.out.println("hi");
             if(!monitor.isStopThread())
             {
-                Buyer buyer = new Buyer("Buyer " + counter, monitor, supermarket);
+                //System.out.println("Entering " + counter);
+                buyer = new Buyer("Buyer " + counter, monitor, supermarket);
                 counter++;
             }
             else
@@ -65,9 +69,28 @@ public class NewMain extends javax.swing.JFrame {
         jButtonResume = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabelOutsideQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelOutsideQueue.setText("People waiting to enter into the supermarket:");
+
+        /*jTextFieldOusideQueue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldOusideQueueActionPerformed(evt);
+            }
+        });
+
+        jTextFieldButcherShopQueue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldButcherShopQueueActionPerformed(evt);
+            }
+        });
+
+        jTextFieldFishShopQueue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFishShopQueueActionPerformed(evt);
+            }
+        });*/
 
         jLabelOutsideQueueButcherShopQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelOutsideQueueButcherShopQueue.setText("People waiting at the butcher shop:");
@@ -78,20 +101,56 @@ public class NewMain extends javax.swing.JFrame {
         jLabelAttendingBuyerButcher.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelAttendingBuyerButcher.setText("Butcher attending to:");
 
+        /*jTextFieldAttendingBuyerButcher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAttendingBuyerButcherActionPerformed(evt);
+            }
+        });*/
+
         jLabelAttendingBuyerFishmonger.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelAttendingBuyerFishmonger.setText("Fishmonger attending to:");
+
+        /*jTextFieldAttendingBuyerFishmonger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAttendingBuyerFishmongerActionPerformed(evt);
+            }
+        });*/
 
         jLabelBuyersShelves.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelBuyersShelves.setText("People at the items shelves:");
 
+        /*jTextFieldBuyersShelves.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBuyersShelvesActionPerformed(evt);
+            }
+        });*/
+
         jLabelCheckAreaQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCheckAreaQueue.setText("People waiting at the check area:");
+
+        /*jTextFieldCheckAreaQueue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCheckAreaQueueActionPerformed(evt);
+            }
+        });*/
 
         jLabelCashier1AttendingBuyer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCashier1AttendingBuyer.setText("Cashier 1 attending to:");
 
+        /*jTextFieldCashier1AttendingBuyer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCashier1AttendingBuyerActionPerformed(evt);
+            }
+        });*/
+
         jLabelCashier2AttendingBuyer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCashier2AttendingBuyer.setText("Cashier 2 attending to:");
+
+        /*jTextFieldCashier2AttendingBuyer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCashier2AttendingBuyerActionPerformed(evt);
+            }
+        });*/
 
         jLabelOutsideQueue9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelOutsideQueue9.setText("Supermarket");
@@ -220,6 +279,41 @@ public class NewMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        
+    /*private void jTextFieldOusideQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+        // TODO add your handling code here:
+    }                                                     
+
+    private void jTextFieldButcherShopQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                           
+        // TODO add your handling code here:
+    }                                                          
+
+    private void jTextFieldFishShopQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        // TODO add your handling code here:
+    }                                                       
+
+    private void jTextFieldAttendingBuyerButcherActionPerformed(java.awt.event.ActionEvent evt) {                                                                
+        // TODO add your handling code here:
+    }                                                               
+
+    private void jTextFieldAttendingBuyerFishmongerActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
+        // TODO add your handling code here:
+    }                                                                  
+
+    private void jTextFieldBuyersShelvesActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+        // TODO add your handling code here:
+    }                                                       
+
+    private void jTextFieldCheckAreaQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                         
+        // TODO add your handling code here:
+    }                                                        
+
+    private void jTextFieldCashier1AttendingBuyerActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
+        // TODO add your handling code here:
+    }                                                                
+
+    private void jTextFieldCashier2AttendingBuyerActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
+        // TODO add your handling code here:
+    }*/     
 
     private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
@@ -249,20 +343,20 @@ public class NewMain extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ServerInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ServerInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ServerInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ServerInterface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServerInterface().setVisible(true);
+                new NewMain().setVisible(true);
             }
         });
     }
