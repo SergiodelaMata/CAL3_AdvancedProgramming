@@ -189,26 +189,37 @@ public class Supermarket {
             monitor.waitResume();
         }
         
-        //semCheckAreaQueue.release();
-        //semOutsideQueue.release();
     }
     
-    public void goButcherShop(String idBuyer)
+    public void goButcherShop(String idBuyer)//Enter butcher´s
     {
+    	butcherQueue.push(idBuyer);
+        try {
+            sleep((long)(Math.random()*2500 + 1500));
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Supermarket.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(monitor.isStopThread())
         {
             monitor.waitResume();
         }
-        //System.out.println(idBuyer + " Butcher");
+        butcherQueue.remove(idBuyer);
     }
+    
     
     public void goFishShop(String idBuyer)
     {
+    	fishmongerQueue.push(idBuyer);
+        try {
+            sleep((long)(Math.random()*2000 + 3000));
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Supermarket.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(monitor.isStopThread())
         {
             monitor.waitResume();
         }
-        //System.out.println(idBuyer + " Fishmonger");
+        fishmongerQueue.remove(idBuyer);
     }
     
     public void goItemShelves(String idBuyer)

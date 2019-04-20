@@ -5,7 +5,7 @@
  */
 package cal3;
 
-import java.util.concurrent.Semaphore;
+
 import javax.swing.JTextField;
 
 /**
@@ -13,74 +13,77 @@ import javax.swing.JTextField;
  * @author Sergio
  */
 public class Butcher extends Thread{
-    private JTextField butcherText;
-    private Semaphore sem;
-    private Monitor butcherMonitor;
-    private Queue butcherQueue = new Queue(butcherText, butcherMonitor);
-    
-    public Butcher(JTextField butcherText, Monitor butcherMonitor) 
-    {
-        this.butcherText = butcherText;
-        this.butcherMonitor = butcherMonitor;
-        this.sem = sem;
-    }
-    
-    public void enter(String s)//To make the thread enter the queue
-    {
-        butcherQueue.push(s);
-        try
-        {
-            sem.acquire();
-        }
-        catch(Exception e)
-        {}
-        butcherQueue.pop(s);
-        //if(exhibitionState)
-        //{
-        butcherQueue.push(s);//?
-        if(butcherMonitor.isStopThread())
-        {
-            butcherMonitor.waitResume();
-        //}
-        }
-    }
-    
-    public void buyButcher(String s)//Enter butcher´s
-    {
-        try {
-            Thread.sleep(1500+(int) (2500*Math.random()));
-            if(butcherMonitor.isStopThread())
-            {
-                butcherMonitor.waitResume();
-            }
-        }
-        catch (InterruptedException e)
-        {}
-    }
-    
-    public void exitButcher()//To make the thread go out of the Exhibition
-    {
-        if(true)//supermarketstate
-        {
-            sem.release();
-        }
-        if(butcherMonitor.isStopThread())
-        {
-            butcherMonitor.waitResume();
-        }
-    }
-    
-    public void run()
-    {
-    	boolean a = false;
-    	
-    	while(a) {
-    		if (butcherMonitor.isStopButcher()){
-    			//buyButcher(butcherQueue.pop());//?
-    			exitButcher();
-    		}
-    	}
-    	a = true;
-    	butcherMonitor.notifyAll();
-    }
+	 	private int id;
+	 	private Monitor monitor;
+	    private boolean free;
+	    private String idBuyer;
+	    private JTextField text;
+	    
+	    public Butcher(int id, Monitor monitor, JTextField text)
+	    {
+	    	this.id = id;
+	        this.monitor = monitor; 
+	        this.free = true;
+	        this.idBuyer = "";
+	        this.text = text;
+	    }
+	    
+	    public void run()
+	    {
+	        while(true)
+	        {
+	            if(monitor.isStopButcher())
+	            {
+	                monitor.makeButcherWait();
+	            }
+	            buyButcher();
+	        }
+	    }
+	    
+	    
+	    public synchronized void buyButcher()
+	    {
+	        try
+	        {
+	            System.out.println(id + " " + idBuyer);
+	            monitor.setEndBuyingMeat(true);
+	            monitor.setBuyerId(idBuyer, id);
+	            monitor.activeThread();
+	        }
+	        catch(Exception e)
+	        {
+	            
+	        }
+	    }
+	    
+
+	    public synchronized boolean isFree()
+	    {
+	        return free;
+	    }
+
+	    public synchronized void setFree(boolean free)
+	    {
+	        this.free = free;
+	    }
+
+	    public String getIdBuyer() {
+	        return idBuyer;
+	    }
+
+	    public synchronized void setIdBuyer(String idBuyer)
+	    {
+	        this.idBuyer = idBuyer;
+	    }
+	    
+	    public synchronized void printShow(String idBuyer)
+	    {
+	        text.setText(idBuyer);
+	    }
+	    
+	    public synchronized void printRemove()
+	    {
+	        text.setText("");
+	    }
+	    
 }
