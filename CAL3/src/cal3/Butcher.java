@@ -37,6 +37,7 @@ public class Butcher extends Thread{
                 monitor.makeButcherWait();
             }
             buyButcher();
+            monitor.setEndBuyingMeat(false);
         }
     }
     
@@ -44,7 +45,6 @@ public class Butcher extends Thread{
     {
         try
         {
-            System.out.println(id + " " + idBuyer);
             monitor.setEndBuyingMeat(true);
             monitor.setBuyerId(idBuyer, id);
             monitor.activeThread();
@@ -52,6 +52,11 @@ public class Butcher extends Thread{
         catch(Exception e)
         {
         }
+    }
+    
+    public int getIdButcher()
+    {
+        return id;
     }
 
     public synchronized boolean isFree()
