@@ -33,4 +33,14 @@ public class CheckArea {
     {
         payQueue.pop(id);
     }
+
+    public Queue getPayQueue() {
+        return payQueue;
+    }
+
+    public void setPayQueue(Queue payQueue) {
+        this.payQueue = payQueue;
+    }
+    
+    
 }
