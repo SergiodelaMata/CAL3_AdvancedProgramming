@@ -20,7 +20,7 @@ public class NewMain extends javax.swing.JFrame {
     public NewMain() {
         initComponents();
         supermarket = new Supermarket(jTextFieldAttendingBuyerButcher, jTextFieldAttendingBuyerFishmonger, jTextFieldButcherShopQueue, jTextFieldFishShopQueue, jTextFieldBuyersShelves, jTextFieldCashier1AttendingBuyer, jTextFieldCashier2AttendingBuyer, jTextFieldCheckAreaQueue, jTextFieldOusideQueue, monitor);
-        while(counter <= 10)
+        while(counter <= 100)
         {
             //System.out.println("hi");
             if(!monitor.isStopThread())
@@ -278,41 +278,6 @@ public class NewMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>                        
-    /*private void jTextFieldOusideQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
-    }                                                     
-
-    private void jTextFieldButcherShopQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                           
-        // TODO add your handling code here:
-    }                                                          
-
-    private void jTextFieldFishShopQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
-    }                                                       
-
-    private void jTextFieldAttendingBuyerButcherActionPerformed(java.awt.event.ActionEvent evt) {                                                                
-        // TODO add your handling code here:
-    }                                                               
-
-    private void jTextFieldAttendingBuyerFishmongerActionPerformed(java.awt.event.ActionEvent evt) {                                                                   
-        // TODO add your handling code here:
-    }                                                                  
-
-    private void jTextFieldBuyersShelvesActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        // TODO add your handling code here:
-    }                                                       
-
-    private void jTextFieldCheckAreaQueueActionPerformed(java.awt.event.ActionEvent evt) {                                                         
-        // TODO add your handling code here:
-    }                                                        
-
-    private void jTextFieldCashier1AttendingBuyerActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }                                                                
-
-    private void jTextFieldCashier2AttendingBuyerActionPerformed(java.awt.event.ActionEvent evt) {                                                                 
-        // TODO add your handling code here:
-    }*/     
 
     private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
