@@ -32,36 +32,12 @@ public class Queue {
         //queue.add(lengthQueue(), id);
         queue.add(id);
         this.print();
-        /*try
-        {
-            sleep(1000);
-        }
-        catch(Exception e)
-        {
-            
-        }*/
     }
     public synchronized String pop(String id)//To eliminate an element of a queue
     {
         String s = queue.get(0);
         queue.remove(0);
-        /*for(int i = 0; i < queue.size(); i++)
-        {
-            if(queue.get(i).equals(id))
-            {
-                queue.remove(i);
-            }
-        }*/
         this.print();
-        /*try
-        {
-            Thread.sleep(1000);
-        }
-        catch(Exception e)
-        {
-            
-        }*/
-        //System.out.println(id + " " + s);
         return s;
     }
     public synchronized void remove(String id)//To eliminate an element of a queue
@@ -74,19 +50,8 @@ public class Queue {
             }
         }
         this.print();
-        /*try
-        {
-            Thread.sleep(1000);
-        }
-        catch(Exception e)
-        {
-            
-        }*/
-        //System.out.println(id + " " + s);
-        //return s;
     }
-    
-    
+        
     public synchronized String top()// To eliminate an element of a queue
     {
         return queue.get(0);
@@ -99,7 +64,6 @@ public class Queue {
         {
             textVisitors+= " " + queue.get(i);
         }
-        //System.out.println(textVisitors);
         text.setText(textVisitors);
     }
     
