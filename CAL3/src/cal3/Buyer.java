@@ -5,6 +5,9 @@
  */
 package cal3;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Sergio
@@ -23,8 +26,17 @@ public class Buyer extends Thread{
     
     public void run()
     {
-        int randNumber = (int) (Math.random()*3);
-        supermarket.enterSupermarket(idBuyer);
+        //int randNumber;
+        supermarket.shopping(idBuyer);
+        
+        //supermarket.enterSupermarket(idBuyer);
+        
+        /*try {
+            sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Buyer.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        /*randNumber = (int) (Math.random()*3);
         if(randNumber == 0)
         {
             supermarket.goButcherShop(idBuyer);
@@ -37,8 +49,17 @@ public class Buyer extends Thread{
         {
             supermarket.goItemShelves(idBuyer);
         }
-        supermarket.payShopping(idBuyer);
-        supermarket.exitSupermarket(idBuyer);
+        try {
+            sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Buyer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        supermarket.payShopping(idBuyer);*/
+        /*try {
+            sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Buyer.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        /*supermarket.exitSupermarket(idBuyer);*/
     }
-    
 }

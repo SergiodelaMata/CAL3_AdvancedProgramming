@@ -14,7 +14,7 @@ import javax.swing.JTextField;
  * @author Sergio
  */
 public class Queue {
-    ArrayList<String> queue = new ArrayList<String>();
+    private ArrayList<String> queue = new ArrayList<String>();
     private int numBuyers;
     private int totalBuyers;
     private JTextField text;
@@ -29,21 +29,43 @@ public class Queue {
     
     public synchronized void push(String id)//To add an element to a queue
     {
+        //queue.add(lengthQueue(), id);
         queue.add(id);
         this.print();
-        try
+        /*try
         {
             sleep(1000);
         }
         catch(Exception e)
         {
             
-        }
+        }*/
     }
-    public synchronized void pop(String id)//To eliminate an element of a queue
+    public synchronized String pop(String id)//To eliminate an element of a queue
     {
-        //String s = queue.get(0);
-        //queue.remove(0);
+        String s = queue.get(0);
+        queue.remove(0);
+        /*for(int i = 0; i < queue.size(); i++)
+        {
+            if(queue.get(i).equals(id))
+            {
+                queue.remove(i);
+            }
+        }*/
+        this.print();
+        /*try
+        {
+            Thread.sleep(1000);
+        }
+        catch(Exception e)
+        {
+            
+        }*/
+        //System.out.println(id + " " + s);
+        return s;
+    }
+    public synchronized void remove(String id)//To eliminate an element of a queue
+    {
         for(int i = 0; i < queue.size(); i++)
         {
             if(queue.get(i).equals(id))
@@ -52,8 +74,18 @@ public class Queue {
             }
         }
         this.print();
+        /*try
+        {
+            Thread.sleep(1000);
+        }
+        catch(Exception e)
+        {
+            
+        }*/
+        //System.out.println(id + " " + s);
         //return s;
     }
+    
     
     public synchronized String top()// To eliminate an element of a queue
     {
@@ -82,6 +114,10 @@ public class Queue {
         {
             queue.remove(0);
         }
+    }
+    public JTextField getTextField()
+    {
+        return text;
     }
     
 }

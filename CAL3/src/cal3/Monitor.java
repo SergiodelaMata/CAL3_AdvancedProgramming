@@ -5,6 +5,8 @@
  */
 package cal3;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Sergio
@@ -17,6 +19,10 @@ public class Monitor {
     private boolean endBuyingMeat;
     private boolean endBuyingFish;
     private boolean endBuying;
+    private boolean butcherWait;
+    private boolean fishmongerWait;
+    private boolean cashierWait;
+    private String [] buyerIdList = {"", ""};
     
     
     public Monitor()
@@ -28,6 +34,9 @@ public class Monitor {
         this.endBuyingMeat = false;
         this.endBuyingFish = false;
         this.endBuying = false;
+        this.butcherWait = true;
+        this.fishmongerWait = true;
+        this.cashierWait = true;
     }
 
     public synchronized void waitResume()//To make the threads wait until the resume Button is pressed
@@ -43,6 +52,7 @@ public class Monitor {
         {
         }
     }
+    
     public synchronized void waitButcher()
     {
         while(stopButcher)
@@ -118,9 +128,9 @@ public class Monitor {
         }
     }
     
-    public synchronized void waitEndBuying()
+    public synchronized void waitEndBuying(String idBuyer, int idCashier)
     {
-        while(endBuying)
+        while(!endBuying && buyerIdList[idCashier] == idBuyer)
         {
             try
             {
@@ -132,6 +142,95 @@ public class Monitor {
             }
         }
     }
+    
+    
+    
+    public synchronized void waitIfDifferentId(String idBuyer, Queue queue, Counter counter)
+    {
+        try
+        {
+            
+            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 5)
+            {
+                wait();
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }
+        System.out.println(idBuyer);
+    }
+    
+    public synchronized String topText(JTextField text)
+    {
+        String idBuyer  = "";
+        char [] idBuyers = (text.getText()).toCharArray();
+        //System.out.println(idBuyers);
+        int i = 2;
+        if(idBuyers.length == 0)
+        {
+            idBuyer = "-1";
+        }
+        else
+        {
+            while(idBuyers[i] != ' ' || idBuyers[i-1] == 'r')
+            {
+                //System.out.println(i + " " + idBuyers[i]);
+                idBuyer += idBuyers[i];
+                i++;
+            }
+        }
+        //System.out.println(idBuyer);
+        return idBuyer;
+    }
+    
+    
+    public synchronized void makeButcherWait()
+    {
+        while(butcherWait)
+        {
+            try
+            {
+                wait();
+            }
+            catch(Exception e)
+            {
+                
+            }
+        }
+    }
+    
+    public synchronized void makeFishmongerWait()
+    {
+        while(fishmongerWait)
+        {
+            try
+            {
+                wait();
+            }
+            catch(Exception e)
+            {
+                
+            }
+        }
+    }
+    
+    public synchronized void makeCashierWait()
+    {
+        while(cashierWait)
+        {
+            try
+            {
+                wait();
+            }
+            catch(Exception e)
+            {
+                
+            }
+        }
+    }
+    
     
     public synchronized boolean isStopThread()//To know if the "Resume" Button has been activated
     {
@@ -190,6 +289,35 @@ public class Monitor {
     public synchronized void setEndBuying(boolean endBuying) {
         this.endBuying = endBuying;
     }
+
+    public synchronized boolean isButcherWait() {
+        return butcherWait;
+    }
+
+    public synchronized void setButcherWait(boolean butcherWait) {
+        this.butcherWait = butcherWait;
+    }
+
+    public synchronized boolean isFishmongerWait() {
+        return fishmongerWait;
+    }
+
+    public synchronized void setFishmongerWait(boolean fishmongerWait) {
+        this.fishmongerWait = fishmongerWait;
+    }
+
+    public synchronized boolean isCashierWait() {
+        return cashierWait;
+    }
+
+    public synchronized void setCashierWait(boolean cashierWait) {
+        this.cashierWait = cashierWait;
+    }
+    
+    public synchronized void setBuyerId(String buyerId, int id) {
+        this.buyerIdList[id] = buyerId;
+    }
+
     
     public synchronized void activeThread()//To tell the threads inside the monitor to look if the "Resume" Button has been pressed
     {

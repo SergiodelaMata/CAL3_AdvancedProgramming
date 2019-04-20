@@ -24,12 +24,12 @@ public class CheckArea {
         return payQueue.lengthQueue();
     }
     
-    public void push(String id)
+    public synchronized void push(String id)
     {
         payQueue.push(id);
     }
     
-    public void pop(String id)
+    public synchronized void pop(String id)
     {
         payQueue.pop(id);
     }
