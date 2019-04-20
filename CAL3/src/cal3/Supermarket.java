@@ -24,7 +24,7 @@ public class Supermarket {
     private CheckArea checkArea;
     private Cashier cashier1, cashier2;
     private Lock lock;
-    private Counter insideBuyerCounter;
+    private Counter insideBuyerCounter, butcherAttendingCounter, fishmongerAttendingCounter, cashierAttendingCounter;
     
     public Supermarket(JTextField buyerButcher,JTextField buyerFishmonger,JTextField butcherQueue, JTextField fishmongerQueue, JTextField buyersShelves, JTextField buyerCashier1, JTextField buyerCashier2, JTextField checkAreaQueue, JTextField outsideQueueField,Monitor monitor)
     {
@@ -34,7 +34,7 @@ public class Supermarket {
         this.outsideQueue = new Queue(outsideQueueField, monitor);
         this.itemShelvesQueue = new Queue(buyersShelves, monitor);
         this.checkArea = new CheckArea(monitor, checkAreaQueue);
-        this.semOutsideQueue = new Semaphore(5, true);
+        this.semOutsideQueue = new Semaphore(20, true);
         this.semButcherQueue = new Semaphore(1, true);
         this.semFishmongerQueue = new Semaphore(1, true);
         this.semCheckAreaQueue = new Semaphore(2, true);
@@ -42,6 +42,9 @@ public class Supermarket {
         this.cashier2 = new Cashier(2, monitor, buyerCashier2);
         this.lock =  new ReentrantLock();
         this.insideBuyerCounter = new Counter();
+        this.butcherAttendingCounter = new Counter();
+        this.fishmongerAttendingCounter = new Counter();
+        this.cashierAttendingCounter = new Counter();
     }
     
     public void shopping(String idBuyer)
@@ -83,7 +86,7 @@ public class Supermarket {
         {
             
             //System.out.println("hola 1");
-            monitor.waitIfDifferentId(idBuyer, outsideQueue, insideBuyerCounter);
+            monitor.waitIfDifferentIdBuyerEnterSupermarket(idBuyer, outsideQueue, insideBuyerCounter);
             semOutsideQueue.acquire();
             insideBuyerCounter.setCounter(insideBuyerCounter.getCounter()+1);
             //System.out.println("hola 2 " + idBuyer);
@@ -108,9 +111,9 @@ public class Supermarket {
         {
             monitor.waitResume();
         }
-        //insideBuyerCounter.setCounter(insideBuyerCounter.getCounter()-1);
-        //semOutsideQueue.release();
-        
+        insideBuyerCounter.setCounter(insideBuyerCounter.getCounter()-1);
+        semOutsideQueue.release();
+        monitor.activeThread();        
     }
     
     public void payShopping(String idBuyer)
@@ -122,14 +125,11 @@ public class Supermarket {
         try
         {
             //sleep(2000);
+            monitor.waitIfDifferentIdBuyerEnterCashier(idBuyer, checkArea.getPayQueue(), cashierAttendingCounter);
             semCheckAreaQueue.acquire();
             checkArea.pop(idBuyer);
-            /*if(cashier1.isFree() && cashier2.isFree())
-            {
-                cashier1.setFree(false);
-                cashier1.setIdBuyer(idBuyer);
-                cashier1.printShow(idBuyer);
-            }*/
+            cashierAttendingCounter.setCounter(cashierAttendingCounter.getCounter()+1);
+            monitor.activeThread();
             if(cashier1.isFree())
             {
                 cashier1.setFree(false);
@@ -149,49 +149,56 @@ public class Supermarket {
                 
                 if(checkArea.lengthCheckArea() == 0)
                 {
-                    monitor.notify();
+                    monitor.activeThread();
                     monitor.setCashierWait(true);
                 }
                 else
                 {
-                    monitor.notifyAll();
+                    monitor.activeThread();
                 }
                 
             }
             else
             {
-                if(checkArea.lengthCheckArea() == 0 || checkArea.lengthCheckArea() == 1)
+                if(checkArea.lengthCheckArea() == 0)
                 {
                     monitor.setCashierWait(true);
                 }
             }
+            if(monitor.isStopThread())
+            {
+                monitor.waitResume();
+            }
             
             if(cashier1.getIdBuyer().equals(idBuyer))
             {
-                monitor.waitEndBuying(idBuyer, 0);
+                sleep((long)(Math.random()*3000 + 2000));
+                monitor.waitEndBuying(idBuyer, cashier1.getIdCashier());
                 cashier1.printRemove();
                 cashier1.setFree(true);
                 cashier1.setIdBuyer("");
+                //System.out.println("Cashier 1: " + cashier1.isFree());
             }
             else if(cashier2.getIdBuyer().equals(idBuyer))
             {
-                monitor.waitEndBuying(idBuyer, 1);
+                sleep((long)(Math.random()*3000 + 2000));
+                monitor.waitEndBuying(idBuyer, cashier2.getIdCashier());
                 cashier2.printRemove();
                 cashier2.setFree(true);
                 cashier2.setIdBuyer("");
+                //System.out.println("Cashier 2: " + cashier2.isFree());
             }
+            
         }
         catch(Exception e)
         {}
-        
-        if(monitor.isStopThread())
-        {
-            monitor.waitResume();
-        }
-        
+        cashierAttendingCounter.setCounter(cashierAttendingCounter.getCounter()-1);
+        monitor.activeThread();
+        //System.out.println(idBuyer + " finished buying");
+        semCheckAreaQueue.release();
     }
     
-    public void goButcherShop(String idBuyer)//Enter butcher´s
+    public void goButcherShop(String idBuyer)//Enter butcherÂ´s
     {
     	butcherQueue.push(idBuyer);
         try {
@@ -203,23 +210,17 @@ public class Supermarket {
         {
             monitor.waitResume();
         }
+        //System.out.println(idBuyer + " Butcher");
         butcherQueue.remove(idBuyer);
     }
     
-    
     public void goFishShop(String idBuyer)
     {
-    	fishmongerQueue.push(idBuyer);
-        try {
-            sleep((long)(Math.random()*2000 + 3000));
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Supermarket.class.getName()).log(Level.SEVERE, null, ex);
-        }
         if(monitor.isStopThread())
         {
             monitor.waitResume();
         }
-        fishmongerQueue.remove(idBuyer);
+        //System.out.println(idBuyer + " Fishmonger");
     }
     
     public void goItemShelves(String idBuyer)
