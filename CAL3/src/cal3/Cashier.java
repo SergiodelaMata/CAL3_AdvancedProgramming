@@ -35,6 +35,7 @@ public class Cashier extends Thread{
                 monitor.makeCashierWait();
             }
             makePayment();
+            monitor.setEndBuying(false);
         }
     }
     
@@ -42,8 +43,6 @@ public class Cashier extends Thread{
     {
         try
         {
-            sleep((long)(Math.random()*3000 + 2000));
-            System.out.println(id + " " + idBuyer);
             monitor.setEndBuying(true);
             monitor.setBuyerId(idBuyer, id);
             monitor.activeThread();
@@ -88,7 +87,6 @@ public class Cashier extends Thread{
     public synchronized void printRemove()
     {
         text.setText("");
-    }
-    
+    }   
     
 }
