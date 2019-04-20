@@ -130,7 +130,7 @@ public class Monitor {
     
     public synchronized void waitEndBuying(String idBuyer, int idCashier)
     {
-        while(!endBuying && buyerIdList[idCashier] == idBuyer)
+        while(!endBuying && buyerIdList[idCashier - 1] == idBuyer)
         {
             try
             {
@@ -143,14 +143,12 @@ public class Monitor {
         }
     }
     
-    
-    
-    public synchronized void waitIfDifferentId(String idBuyer, Queue queue, Counter counter)
+    public synchronized void waitIfDifferentIdBuyerEnterSupermarket(String idBuyer, Queue queue, Counter counter)
     {
         try
         {
             
-            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 5)
+            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 20)
             {
                 wait();
             }
@@ -159,7 +157,7 @@ public class Monitor {
         {
             
         }
-        System.out.println(idBuyer);
+        //System.out.println(idBuyer);
     }
     
     public synchronized String topText(JTextField text)
@@ -185,6 +183,56 @@ public class Monitor {
         return idBuyer;
     }
     
+    public synchronized void waitIfDifferentIdBuyerButcher(String idBuyer, Queue queue, Counter counter)
+    {
+        try
+        {
+            
+            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 1)
+            {
+                wait();
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }
+        System.out.println(idBuyer);
+    }
+    
+    public synchronized void waitIfDifferentIdBuyerEnterFishmonger(String idBuyer, Queue queue, Counter counter)
+    {
+        try
+        {
+            
+            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 1)
+            {
+                wait();
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }
+        System.out.println(idBuyer);
+    }
+    
+    public synchronized void waitIfDifferentIdBuyerEnterCashier(String idBuyer, Queue queue, Counter counter)
+    {
+        try
+        {
+            
+            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 2)
+            {
+                wait();
+            }
+        }
+        catch(Exception e)
+        {
+            
+        }
+        System.out.println(idBuyer);
+    }
     
     public synchronized void makeButcherWait()
     {
