@@ -27,6 +27,8 @@ public class Buyer extends Thread{
     public void run()
     {
         //int randNumber;
+        
+        
         supermarket.shopping(idBuyer);
         
         //supermarket.enterSupermarket(idBuyer);
@@ -61,5 +63,9 @@ public class Buyer extends Thread{
             Logger.getLogger(Buyer.class.getName()).log(Level.SEVERE, null, ex);
         }*/
         /*supermarket.exitSupermarket(idBuyer);*/
+    }
+
+    private void Sleep(double d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
