@@ -16,6 +16,7 @@ public class NewMain extends javax.swing.JFrame {
     Buyer buyer;
     Supermarket supermarket;
     Monitor monitor = new Monitor();
+    Server server = new Server(monitor);
     int counter = 1;
     public NewMain() {
         initComponents();
@@ -26,6 +27,13 @@ public class NewMain extends javax.swing.JFrame {
             if(!monitor.isStopThread())
             {
                 //System.out.println("Entering " + counter);
+                    try
+                    {
+                        Sleep(800*Math.random() + 200);
+                    }
+                    catch(Exception e)
+                    {
+                    }
                 buyer = new Buyer("Buyer " + counter, monitor, supermarket);
                 counter++;
             }
@@ -66,6 +74,7 @@ public class NewMain extends javax.swing.JFrame {
         jLabelOutsideQueue9 = new javax.swing.JLabel();
         jButtonStop = new javax.swing.JButton();
         jButtonResume = new javax.swing.JButton();
+        jButtonComplete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -175,6 +184,17 @@ public class NewMain extends javax.swing.JFrame {
                 jButtonResumeActionPerformed(evt);
             }
         });
+        
+        jButtonComplete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButtonComplete.setText("Complete");
+        jButtonComplete.setMaximumSize(new java.awt.Dimension(100, 23));
+        jButtonComplete.setMinimumSize(new java.awt.Dimension(100, 23));
+        jButtonComplete.setPreferredSize(new java.awt.Dimension(100, 23));
+        jButtonComplete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCompleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,7 +224,9 @@ public class NewMain extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(200, 200, 200)
                         .addComponent(jButtonStop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(200, 200, 200)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButtonComplete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
                         .addComponent(jButtonResume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
@@ -239,7 +261,6 @@ public class NewMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldButcherShopQueue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFishShopQueue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -271,7 +292,8 @@ public class NewMain extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonStop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonResume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonResume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonComplete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
@@ -289,6 +311,12 @@ public class NewMain extends javax.swing.JFrame {
         monitor.setStopThread(false);//It is changed the value of the shared variable to make the thread be active again
         monitor.activeThread();//To active the thread again
     }
+    
+    private void jButtonCompleteActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        // TODO add your handling code here:
+        monitor.setComplete(true);
+        monitor.activeThread();
+    }   
 
     /**
      * @param args the command line arguments
@@ -325,7 +353,8 @@ public class NewMain extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify                     
+    // Variables declaration - do not modify   
+    private javax.swing.JButton jButtonComplete;
     private javax.swing.JButton jButtonResume;
     private javax.swing.JButton jButtonStop;
     private javax.swing.JLabel jLabelAttendingBuyerButcher;
@@ -348,4 +377,8 @@ public class NewMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldFishShopQueue;
     private javax.swing.JTextField jTextFieldOusideQueue;
     // End of variables declaration                   
+
+    private void Sleep(double d) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
