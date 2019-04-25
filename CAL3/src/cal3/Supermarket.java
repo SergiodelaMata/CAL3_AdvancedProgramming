@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Sergio
+ * @author Sergio, Manuel
  */
 public class Supermarket {
 	private Monitor monitor;
@@ -27,7 +27,8 @@ public class Supermarket {
 	private Butcher butcher;
 	private Fishmonger fishmonger;
 	private Counter insideBuyerCounter, butcherAttendingCounter, fishmongerAttendingCounter, cashierAttendingCounter;
-
+	private LoggerThread log;
+	
 	public Supermarket(JTextField buyerButcher, JTextField buyerFishmonger, JTextField butcherQueue,
 			JTextField fishmongerQueue, JTextField buyersShelves, JTextField buyerCashier1, JTextField buyerCashier2,
 			JTextField checkAreaQueue, JTextField outsideQueueField, Monitor monitor) {
@@ -50,6 +51,7 @@ public class Supermarket {
 		this.butcherAttendingCounter = new Counter();
 		this.fishmongerAttendingCounter = new Counter();
 		this.cashierAttendingCounter = new Counter();
+		this.log = new LoggerThread();
 	}
 
 	public void shopping(String idBuyer) {
@@ -89,6 +91,7 @@ public class Supermarket {
 			insideBuyerCounter.setCounter(insideBuyerCounter.getCounter() + 1);
 			// System.out.println("hola 2 " + idBuyer);
 			outsideQueue.pop(idBuyer);
+			log.log(idBuyer + " enters the supermarket");
 			monitor.activeThread();
 			// System.out.println("hola 3 " + idBuyer);
 		} catch (Exception e) {
@@ -101,10 +104,11 @@ public class Supermarket {
 	}
 
 	public void exitSupermarket(String idBuyer) {
-
+		
 		if (monitor.isStopThread()) {
 			monitor.waitResume();
 		}
+		log.log(idBuyer + " exits the supermarket");
 		insideBuyerCounter.setCounter(insideBuyerCounter.getCounter() - 1);
 		semOutsideQueue.release();
 		monitor.activeThread();
@@ -112,9 +116,9 @@ public class Supermarket {
 
 	public void payShopping(String idBuyer) {
 		checkArea.push(idBuyer);
-		// int idCashier;
-		// System.out.println("Ready");
-		// checkArea.pop(idBuyer);
+		
+		log.log(idBuyer + " waits at the checkout area");
+		
 		try {
 			// sleep(2000);
 			monitor.waitIfDifferentIdBuyerEnterCashier(idBuyer, checkArea.getPayQueue(), cashierAttendingCounter);
@@ -152,6 +156,7 @@ public class Supermarket {
 			}
 
 			if (cashier1.getIdBuyer().equals(idBuyer)) {
+				log.log("Cashier 1 charges " + idBuyer);
 				sleep((long) (Math.random() * 3000 + 2000));
 				monitor.waitEndBuying(idBuyer, cashier1.getIdCashier());
 				cashier1.printRemove();
@@ -159,6 +164,7 @@ public class Supermarket {
 				cashier1.setIdBuyer("");
 				// System.out.println("Cashier 1: " + cashier1.isFree());
 			} else if (cashier2.getIdBuyer().equals(idBuyer)) {
+				log.log("Cashier 2 charges " + idBuyer);
 				sleep((long) (Math.random() * 3000 + 2000));
 				monitor.waitEndBuying(idBuyer, cashier2.getIdCashier());
 				cashier2.printRemove();
@@ -178,6 +184,7 @@ public class Supermarket {
 	public void goButcherShop(String idBuyer)// Enter butcherÂ´s
 	{
 		butcherQueue.push(idBuyer);
+		log.log(idBuyer + " waits at the butcher shop");
 		if (monitor.isStopThread()) {
 			monitor.waitResume();
 		}
@@ -187,7 +194,6 @@ public class Supermarket {
 
 	public void buyButcher(String idBuyer) {
 		butcherQueue.push(idBuyer);
-
 		try {
 			semButcherQueue.acquire();
 			butcherQueue.pop(idBuyer);
@@ -209,6 +215,7 @@ public class Supermarket {
 			}
 
 			if (butcher.getIdBuyer().equals(idBuyer)) {
+				log.log("Butcher attends " + idBuyer);
 				sleep((long) (Math.random() * 2500 + 1500));
 				monitor.waitBuyingMeat();
 				butcher.printRemove();
@@ -226,6 +233,7 @@ public class Supermarket {
 	public void goFishmongerShop(String idBuyer)// Enter fishmonger´s
 	{
 		fishmongerQueue.push(idBuyer);
+		log.log(idBuyer + " waits at the fishmonger shop");
 		if (monitor.isStopThread()) {
 			monitor.waitResume();
 		}
@@ -256,6 +264,7 @@ public class Supermarket {
 			}
 
 			if (fishmonger.getIdBuyer().equals(idBuyer)) {
+				log.log("Fishmonger attends " + idBuyer);
 				sleep((long) (Math.random() * 2000 + 3000));
 				monitor.waitBuyingFish();
 				fishmonger.printRemove();
@@ -272,6 +281,7 @@ public class Supermarket {
 
 	public void goItemShelves(String idBuyer) {
 		itemShelvesQueue.push(idBuyer);
+		log.log(idBuyer + " picks items from the item shelves");
 		try {
 			sleep((long) (Math.random() * 11000 + 1000));
 		} catch (InterruptedException ex) {
