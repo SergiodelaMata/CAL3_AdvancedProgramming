@@ -22,6 +22,7 @@ public class Monitor {
     private boolean butcherWait;
     private boolean fishmongerWait;
     private boolean cashierWait;
+    private boolean complete;
     private String [] buyerIdList = {"", ""};
     
     
@@ -37,6 +38,7 @@ public class Monitor {
         this.butcherWait = true;
         this.fishmongerWait = true;
         this.cashierWait = true;
+        this.complete = false;
     }
 
     public synchronized void waitResume()//To make the threads wait until the resume Button is pressed
@@ -148,7 +150,7 @@ public class Monitor {
         try
         {
             
-            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 20)
+            while((!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 20) && !complete)
             {
                 wait();
             }
@@ -188,7 +190,7 @@ public class Monitor {
         try
         {
             
-            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 1)
+            while((!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 1) && !complete)
             {
                 wait();
             }
@@ -205,7 +207,7 @@ public class Monitor {
         try
         {
             
-            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 1)
+            while((!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 1) && !complete)
             {
                 wait();
             }
@@ -366,7 +368,14 @@ public class Monitor {
         this.buyerIdList[id] = buyerId;
     }
 
-    
+    public synchronized boolean isComplete() {
+        return complete;
+    }
+
+    public synchronized void setComplete(boolean complete) {
+        this.complete = complete;
+    }
+
     public synchronized void activeThread()//To tell the threads inside the monitor to look if the "Resume" Button has been pressed
     {
         notifyAll();
