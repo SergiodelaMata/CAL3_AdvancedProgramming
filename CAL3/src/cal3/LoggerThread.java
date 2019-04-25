@@ -12,7 +12,7 @@ public class LoggerThread extends Thread {
 	public LoggerThread() {	
 		try {
 			this.logger = Logger.getLogger("MyLog");
-			this.fh = new FileHandler("C:/Users/Manuel/Desktop/log.txt");
+			this.fh = new FileHandler("C:/Users/Sergio/Desktop/log.txt");
 			logger.addHandler(fh);
 			this.sf = new SimpleFormatter();
 			fh.setFormatter(sf);
