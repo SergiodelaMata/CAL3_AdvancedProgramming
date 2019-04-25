@@ -32,9 +32,13 @@ public class Butcher extends Thread{
     {
         while(true)
         {
-            if(monitor.isStopButcher())
+            if(monitor.isButcherWait())
             {
                 monitor.makeButcherWait();
+            }
+            if(monitor.isStopButcher())
+            {
+                monitor.waitButcher();
             }
             buyButcher();
             monitor.setEndBuyingMeat(false);

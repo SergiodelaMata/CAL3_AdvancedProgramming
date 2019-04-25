@@ -32,9 +32,13 @@ public class Fishmonger extends Thread{
     {
         while(true)
         {
-            if(monitor.isStopFishmonger())
+            if(monitor.isFishmongerWait())
             {
                 monitor.makeFishmongerWait();
+            }
+            if(monitor.isStopFishmonger())
+            {
+                monitor.waitButcher();
             }
             buyFishmonger();
             monitor.setEndBuyingFish(false);
