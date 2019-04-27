@@ -6,9 +6,8 @@
 package cal3;
 
 import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -18,6 +17,7 @@ import javax.swing.JTextField;
  * @author Sergio, Manuel
  */
 public class Supermarket {
+    //private int maximumClientNumber;
     private Monitor monitor;
     private Semaphore semOutsideQueue, semButcherQueue, semFishmongerQueue, semCheckAreaQueue;
     private Queue outsideQueue, butcherQueue, fishmongerQueue, itemShelvesQueue;
@@ -25,11 +25,11 @@ public class Supermarket {
     private Cashier cashier1, cashier2;
     private Butcher butcher;
     private Fishmonger fishmonger;
-    private Lock lock;
-    private Counter insideBuyerCounter, butcherAttendingCounter, fishmongerAttendingCounter, cashierAttendingCounter;
+    private Counter insideBuyerCounter, butcherAttendingCounter, fishmongerAttendingCounter, cashierAttendingCounter, counterBuyerEnter, counterBuyerExit, accumulationTimesButcher, accumulationTimesFishmonger;
     private LoggerThread log;
+    private ArrayList<Long> timeServiceButcherList, timeWaitingButcherList, timeServiceFishmongerList, timeWaitingFishmongerList, timeEnterAndLeaveList, timeWaitOutsideQueueAndLeaveList;
     
-    public Supermarket(JTextField buyerButcher,JTextField buyerFishmonger,JTextField butcherQueue, JTextField fishmongerQueue, JTextField buyersShelves, JTextField buyerCashier1, JTextField buyerCashier2, JTextField checkAreaQueue, JTextField outsideQueueField,Monitor monitor)
+    public Supermarket(JTextField buyerButcher,JTextField buyerFishmonger,JTextField butcherQueue, JTextField fishmongerQueue, JTextField buyersShelves, JTextField buyerCashier1, JTextField buyerCashier2, JTextField checkAreaQueue, JTextField outsideQueueField,Monitor monitor, LoggerThread log)
     {
         this.monitor = monitor;
         this.butcherQueue = new Queue(butcherQueue, monitor);
@@ -45,15 +45,26 @@ public class Supermarket {
         this.cashier2 = new Cashier(2, monitor, buyerCashier2);
         this.butcher = new Butcher(0, monitor, buyerButcher);
         this.fishmonger = new Fishmonger(3, monitor, buyerFishmonger);
-        this.lock =  new ReentrantLock();
         this.insideBuyerCounter = new Counter();
         this.butcherAttendingCounter = new Counter();
         this.fishmongerAttendingCounter = new Counter();
         this.cashierAttendingCounter = new Counter();
-        this.log = new LoggerThread();
+        this.counterBuyerEnter = new Counter();
+        this.counterBuyerExit = new Counter();
+        this.accumulationTimesButcher = new Counter();
+        this.accumulationTimesFishmonger = new Counter();
+        this.log = log;
+        this.timeServiceButcherList = new ArrayList<>();
+        this.timeServiceFishmongerList = new ArrayList<>();
+        this.timeWaitingButcherList = new ArrayList<>();
+        this.timeWaitingFishmongerList = new ArrayList<>();
+        this.timeEnterAndLeaveList = new ArrayList<>();
+        this.timeWaitOutsideQueueAndLeaveList = new ArrayList<>();
+        //this.maximumClientNumber = maximumClientNumber;
+        
     }
     
-    public void shopping(String idBuyer)
+    /**public void shopping(String idBuyer)
     {
         int randNumber;
         boolean attended = false;
@@ -87,39 +98,43 @@ public class Supermarket {
         }    
         exitSupermarket(idBuyer);
         
-    }
-    public int selectOperation()
+    }*/
+    
+    public void enterOutsideQueue(String idBuyer)
     {
-        return (int) (Math.random()*3);
+        outsideQueue.push(idBuyer);
+        monitor.waitIfDifferentIdBuyerEnterSupermarket(idBuyer, outsideQueue, insideBuyerCounter);
     }
     
     
     public void enterSupermarket(String idBuyer)
     {
-        outsideQueue.push(idBuyer);                
+        //outsideQueue.push(idBuyer);
         try
         {
             
             //System.out.println("hola 1");
-            monitor.waitIfDifferentIdBuyerEnterSupermarket(idBuyer, outsideQueue, insideBuyerCounter);
-            if(!monitor.isComplete())
-            {
+            //monitor.waitIfDifferentIdBuyerEnterSupermarket(idBuyer, outsideQueue, insideBuyerCounter);
+            //if(!monitor.isComplete())
+            //{
                 semOutsideQueue.acquire();
                 insideBuyerCounter.setCounter(insideBuyerCounter.getCounter()+1);
+                counterBuyerEnter.setCounter(counterBuyerEnter.getCounter()+1);
                 //System.out.println("hola 2 " + idBuyer);
                 if(monitor.isStopThread())
                 {
                     monitor.waitResume();
                 }
                 outsideQueue.pop(idBuyer);
+                System.out.println(idBuyer + " enters the supermarket");
                 log.log(idBuyer + " enters the supermarket");
                 monitor.activeThread();
                 //System.out.println("hola 3 " + idBuyer);
-            }
-            else
-            {
-                outsideQueue.pop(idBuyer);
-            }
+            //}
+            //else
+            //{
+            //    outsideQueue.pop(idBuyer);
+            //}
         }
         catch(Exception e)
         {}
@@ -138,13 +153,22 @@ public class Supermarket {
         {
             monitor.waitResume();
         }
+        System.out.println(idBuyer + " exits the supermarket");
         log.log(idBuyer + " exits the supermarket");
         insideBuyerCounter.setCounter(insideBuyerCounter.getCounter()-1);//May need to be changed
         if(!monitor.isComplete())
         {
             semOutsideQueue.release();
         }
-        monitor.activeThread();        
+        counterBuyerExit.setCounter(counterBuyerExit.getCounter()+1);
+        monitor.activeThread();
+        /**if(counterBuyerExit.getCounter() >= maximumClientNumber)
+        {
+            log.log("Butcher shop average service time: " + counterServiceTime(timeServiceButcherList) + "ms");
+            log.log("Fish shop average service time: " + counterServiceTime(timeServiceFishmongerList) + "ms");
+            log.log("Total number of people who have entered the supermarket: " + counterBuyerEnter.getCounter());
+            log.log("Total number of people who have left the supermarket: " + counterBuyerExit.getCounter());
+        }*/
     }
     
     public void payShopping(String idBuyer)
@@ -257,7 +281,9 @@ public class Supermarket {
     
     public boolean buyButcher(String idBuyer) {
         boolean attended = false;
+        long randNumber;
         butcherQueue.push(idBuyer);
+        System.out.println(idBuyer + " waits at the butcher shop");
         log.log(idBuyer + " waits at the butcher shop");
         monitor.waitIfDifferentIdBuyerButcher(idBuyer, butcherQueue, butcherAttendingCounter);
         if(!monitor.isComplete())
@@ -282,6 +308,25 @@ public class Supermarket {
                 {
                     monitor.setButcherWait(false);
                     monitor.activeThread();
+                    if(butcherQueue.lengthQueue() == 0)
+                    {
+                        monitor.setButcherWait(true);
+                    }
+                    else
+                    {
+                        accumulationTimesButcher.setCounter(accumulationTimesButcher.getCounter()+1);
+                    }
+                }
+                else
+                {
+                    if(butcherQueue.lengthQueue() == 0)
+                    {
+                        monitor.setButcherWait(true);
+                    }
+                    else
+                    {
+                        accumulationTimesButcher.setCounter(accumulationTimesButcher.getCounter()+1);
+                    }
                 }
                 if(monitor.isStopButcher())
                 {
@@ -297,8 +342,11 @@ public class Supermarket {
                 }
                 if (butcher.getIdBuyer().equals(idBuyer))
                 {
+                    System.out.println("Butcher attends " + idBuyer);
                     log.log("Butcher attends " + idBuyer);
-                    sleep((long) (Math.random() * 2500 + 1500));
+                    randNumber = (long) (Math.random() * 2500 + 1500);
+                    timeServiceButcherList.add(randNumber);
+                    sleep(randNumber);
                     monitor.waitBuyingMeat();
                     if(monitor.isStopButcher())
                     {
@@ -346,7 +394,9 @@ public class Supermarket {
     public boolean buyFishmonger(String idBuyer)
     {
         boolean attended = false;
+        long randNumber;
         fishmongerQueue.push(idBuyer);
+        System.out.println(idBuyer + " waits at the fishmonger shop");
         log.log(idBuyer + " waits at the fishmonger shop");
         monitor.waitIfDifferentIdBuyerEnterFishmonger(idBuyer, fishmongerQueue, fishmongerAttendingCounter);
         if(!monitor.isComplete())
@@ -370,6 +420,25 @@ public class Supermarket {
                 {
                     monitor.setFishmongerWait(false);
                     monitor.activeThread();
+                    if(fishmongerQueue.lengthQueue() == 0)
+                    {
+                        monitor.setFishmongerWait(true);
+                    }
+                    else
+                    {
+                        accumulationTimesFishmonger.setCounter(accumulationTimesFishmonger.getCounter()+1);
+                    }
+                }
+                else
+                {
+                    if(fishmongerQueue.lengthQueue() == 0)
+                    {
+                        monitor.setFishmongerWait(true);
+                    }
+                    else
+                    {
+                        accumulationTimesFishmonger.setCounter(accumulationTimesFishmonger.getCounter()+1);
+                    }
                 }
                 if(monitor.isStopFishmonger())
                 {
@@ -385,8 +454,11 @@ public class Supermarket {
                 }
                 if (fishmonger.getIdBuyer().equals(idBuyer))
                 {
+                    System.out.println("Fishmonger attends " + idBuyer);
                     log.log("Fishmonger attends " + idBuyer);
-                    sleep((long) (Math.random() * 2000 + 3000));
+                    randNumber = (long) (Math.random() * 2000 + 3000);
+                    timeServiceFishmongerList.add(randNumber);
+                    sleep(randNumber);
                     monitor.waitBuyingFish();
                     if(monitor.isStopFishmonger())
                     {
@@ -425,7 +497,9 @@ public class Supermarket {
     {
         itemShelvesQueue.push(idBuyer);
         try {
+            System.out.println(idBuyer + " picks items from the item shelves");
             log.log(idBuyer + " picks items from the item shelves");
+            log.log(itemShelvesQueue.lengthQueue() + " people picking items from the item shelves");
             sleep((long)(Math.random()*11000 + 1000));
         } catch (InterruptedException ex) {
             Logger.getLogger(Supermarket.class.getName()).log(Level.SEVERE, null, ex);
@@ -437,4 +511,70 @@ public class Supermarket {
         itemShelvesQueue.remove(idBuyer);
         //System.out.println(idBuyer + " Items");
     }
+    
+    public long counterAverageServiceTime(ArrayList<Long> timeList)
+    {
+        long sum = 0;
+        long average = 0;
+        if(timeList.size() != 0)
+        {
+            for(int i = 0; i < timeList.size(); i++)
+            {
+                sum += timeList.get(i);
+            }
+            average = sum / timeList.size();
+        }
+        return average;
+        
+    }
+    
+    public void goOutOutsideQueue(String idBuyer)
+    {
+        outsideQueue.pop(idBuyer);
+    }
+    
+    public void addEnterAndLeaveTime(long average)
+    {
+        timeEnterAndLeaveList.add(average);
+    }
+    
+    public void addWaitOutsideQueueAndLeaveTime(long average)
+    {
+        timeWaitOutsideQueueAndLeaveList.add(average);
+    }
+
+    public ArrayList<Long> getTimeEnterAndLeaveList() {
+        return timeEnterAndLeaveList;
+    }
+
+    public ArrayList<Long> getTimeWaitOutsideQueueAndLeaveList() {
+        return timeWaitOutsideQueueAndLeaveList;
+    }
+
+    public Counter getCounterBuyerExit() {
+        return counterBuyerExit;
+    }
+
+    public Counter getCounterBuyerEnter() {
+        return counterBuyerEnter;
+    }
+
+    public ArrayList<Long> getTimeServiceButcherList() {
+        return timeServiceButcherList;
+    }
+
+    public ArrayList<Long> getTimeServiceFishmongerList() {
+        return timeServiceFishmongerList;
+    }
+
+    public Counter getAccumulationTimesButcher() {
+        return accumulationTimesButcher;
+    }
+
+    public Counter getAccumulationTimesFishmonger() {
+        return accumulationTimesFishmonger;
+    }
+    
+    
+    
 }
