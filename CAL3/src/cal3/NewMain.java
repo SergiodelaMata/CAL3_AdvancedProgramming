@@ -13,14 +13,17 @@ public class NewMain extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    Buyer buyer;
-    Supermarket supermarket;
-    Monitor monitor = new Monitor();
-    Server server = new Server(monitor);
-    int counter = 1;
+    private Buyer buyer;
+    private Supermarket supermarket;
+    private Monitor monitor = new Monitor();
+    private Server server = new Server(monitor);
+    private int counter = 1;
+    private LoggerThread log;
+    
     public NewMain() {
         initComponents();
-        supermarket = new Supermarket(jTextFieldAttendingBuyerButcher, jTextFieldAttendingBuyerFishmonger, jTextFieldButcherShopQueue, jTextFieldFishShopQueue, jTextFieldBuyersShelves, jTextFieldCashier1AttendingBuyer, jTextFieldCashier2AttendingBuyer, jTextFieldCheckAreaQueue, jTextFieldOusideQueue, monitor);
+        log = new LoggerThread();
+        supermarket = new Supermarket(jTextFieldAttendingBuyerButcher, jTextFieldAttendingBuyerFishmonger, jTextFieldButcherShopQueue, jTextFieldFishShopQueue, jTextFieldBuyersShelves, jTextFieldCashier1AttendingBuyer, jTextFieldCashier2AttendingBuyer, jTextFieldCheckAreaQueue, jTextFieldOusideQueue, monitor, log);
         while(counter <= 100)
         {
             //System.out.println("hi");
@@ -34,7 +37,7 @@ public class NewMain extends javax.swing.JFrame {
                     catch(Exception e)
                     {
                     }
-                buyer = new Buyer("Buyer " + counter, monitor, supermarket);
+                buyer = new Buyer("Buyer " + counter, monitor, supermarket, 100, log);
                 counter++;
             }
             else
