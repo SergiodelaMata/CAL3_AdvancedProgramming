@@ -18,6 +18,7 @@ import javax.swing.JTextField;
  */
 public class Supermarket {
     //private int maximumClientNumber;
+    private JTextField numberPeopleShelves;
     private Monitor monitor;
     private Semaphore semOutsideQueue, semButcherQueue, semFishmongerQueue, semCheckAreaQueue;
     private Queue outsideQueue, butcherQueue, fishmongerQueue, itemShelvesQueue;
@@ -25,13 +26,14 @@ public class Supermarket {
     private Cashier cashier1, cashier2;
     private Butcher butcher;
     private Fishmonger fishmonger;
-    private Counter insideBuyerCounter, butcherAttendingCounter, fishmongerAttendingCounter, cashierAttendingCounter, counterBuyerEnter, counterBuyerExit, accumulationTimesButcher, accumulationTimesFishmonger;
+    private Counter insideBuyerCounter, butcherAttendingCounter, fishmongerAttendingCounter, cashierAttendingCounter, counterBuyerEnter, counterBuyerExit, counterItemShelves, accumulationTimesButcher, accumulationTimesFishmonger;
     private LoggerThread log;
     private ArrayList<Long> timeServiceButcherList, timeWaitingButcherList, timeServiceFishmongerList, timeWaitingFishmongerList, timeEnterAndLeaveList, timeWaitOutsideQueueAndLeaveList;
     
-    public Supermarket(JTextField buyerButcher,JTextField buyerFishmonger,JTextField butcherQueue, JTextField fishmongerQueue, JTextField buyersShelves, JTextField buyerCashier1, JTextField buyerCashier2, JTextField checkAreaQueue, JTextField outsideQueueField,Monitor monitor, LoggerThread log)
+    public Supermarket(JTextField buyerButcher,JTextField buyerFishmonger,JTextField butcherQueue, JTextField fishmongerQueue, JTextField buyersShelves, JTextField jTextFieldNumberPeopleShelves, JTextField buyerCashier1, JTextField buyerCashier2, JTextField checkAreaQueue, JTextField outsideQueueField,Monitor monitor, LoggerThread log)
     {
         this.monitor = monitor;
+        this.numberPeopleShelves = jTextFieldNumberPeopleShelves;
         this.butcherQueue = new Queue(butcherQueue, monitor);
         this.fishmongerQueue = new Queue(fishmongerQueue, monitor);
         this.outsideQueue = new Queue(outsideQueueField, monitor);
@@ -49,6 +51,8 @@ public class Supermarket {
         this.butcherAttendingCounter = new Counter();
         this.fishmongerAttendingCounter = new Counter();
         this.cashierAttendingCounter = new Counter();
+        this.counterItemShelves = new Counter();
+        this.counterItemShelves.setCounter(0, this.numberPeopleShelves);
         this.counterBuyerEnter = new Counter();
         this.counterBuyerExit = new Counter();
         this.accumulationTimesButcher = new Counter();
@@ -497,9 +501,10 @@ public class Supermarket {
     {
         itemShelvesQueue.push(idBuyer);
         try {
+            counterItemShelves.setCounter(counterItemShelves.getCounter()+1, numberPeopleShelves);
             System.out.println(idBuyer + " picks items from the item shelves");
             log.log(idBuyer + " picks items from the item shelves");
-            log.log(itemShelvesQueue.lengthQueue() + " people picking items from the item shelves");
+            log.log(counterItemShelves.getCounter() + " people picking items from the item shelves");
             sleep((long)(Math.random()*11000 + 1000));
         } catch (InterruptedException ex) {
             Logger.getLogger(Supermarket.class.getName()).log(Level.SEVERE, null, ex);
@@ -509,6 +514,9 @@ public class Supermarket {
             monitor.waitResume();
         }
         itemShelvesQueue.remove(idBuyer);
+        counterItemShelves.setCounter(counterItemShelves.getCounter()-1, numberPeopleShelves);
+        log.log(idBuyer + " has finished picking items from the item shelves");
+        log.log(counterItemShelves.getCounter() + " people picking items from the item shelves");
         //System.out.println(idBuyer + " Items");
     }
     
