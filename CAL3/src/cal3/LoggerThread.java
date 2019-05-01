@@ -16,8 +16,9 @@ public class LoggerThread extends Thread {
 	private FileHandler fh;
 	private SimpleFormatter sf;
         private ArrayList<String> information;
-        private int counter;
-        private Lock lock;
+        private Counter counter;
+        //private int counter;
+        //private Lock lock;
         
         
 	public LoggerThread()
@@ -30,8 +31,8 @@ public class LoggerThread extends Thread {
                 this.sf = new SimpleFormatter();
                 fh.setFormatter(sf);
                 information = new ArrayList<>();
-                counter = 0;
-                lock = new ReentrantLock();
+                this.counter = new Counter();
+                //lock = new ReentrantLock();
                 this.start();
             }
             catch (Exception e)
@@ -42,23 +43,23 @@ public class LoggerThread extends Thread {
         {
             while(true)
             {
-                if(counter < information.size())
+                if(counter.getCounter() < information.size())
                 {
                     //System.out.println(counter + " " + information.size());
-                    try
+                    /*try
                     {
-                        lock.lock();
-                        write(counter);
-                        counter++;
-                    }
+                        lock.lock();*/
+                        write(counter.getCounter());
+                        counter.setCounter(counter.getCounter()+1);
+                    /*}
                     finally
                     {
                         lock.unlock();
-                    }
+                    }*/
                     
-                    System.out.println("Dentro " + counter);
+                    //System.out.println("Dentro " + counter.getCounter());
                 }
-                System.out.println(counter);
+                //System.out.println(counter.getCounter());
             }
         }
         
@@ -76,7 +77,7 @@ public class LoggerThread extends Thread {
         
         public synchronized int getCounter()
         {
-            return counter;
+            return counter.getCounter();
         }
         
         public synchronized int length()
