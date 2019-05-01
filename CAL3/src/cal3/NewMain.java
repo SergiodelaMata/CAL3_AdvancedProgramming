@@ -5,6 +5,7 @@
  */
 package cal3;
 
+import static java.lang.Thread.sleep;
 /**
  *
  * @author Sergio
@@ -13,38 +14,17 @@ public class NewMain extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private Buyer buyer;
-    private Supermarket supermarket;
-    private Monitor monitor = new Monitor();
-    private Server server = new Server(monitor);
-    private int counter = 1;
+    private Monitor monitor;
+    private WorkoutSupermarket workSupermarket;
     private LoggerThread log;
+    private Supermarket supermarket;
     
     public NewMain() {
         initComponents();
-        log = new LoggerThread();
-        supermarket = new Supermarket(jTextFieldAttendingBuyerButcher, jTextFieldAttendingBuyerFishmonger, jTextFieldButcherShopQueue, jTextFieldFishShopQueue, jTextFieldBuyersShelves, jTextFieldCashier1AttendingBuyer, jTextFieldCashier2AttendingBuyer, jTextFieldCheckAreaQueue, jTextFieldOusideQueue, monitor, log);
-        while(counter <= 100)
-        {
-            //System.out.println("hi");
-            if(!monitor.isStopThread())
-            {
-                //System.out.println("Entering " + counter);
-                    try
-                    {
-                        Sleep(800*Math.random() + 200);
-                    }
-                    catch(Exception e)
-                    {
-                    }
-                buyer = new Buyer("Buyer " + counter, monitor, supermarket, 100, log);
-                counter++;
-            }
-            else
-            {
-                monitor.waitResume();
-            }
-        }
+        this.monitor = new Monitor();
+        this.log = new LoggerThread();
+        this.supermarket = new Supermarket(jTextFieldAttendingBuyerButcher, jTextFieldAttendingBuyerFishmonger, jTextFieldButcherShopQueue, jTextFieldFishShopQueue, jTextFieldBuyersShelves, jTextFieldNumberPeopleShelves, jTextFieldCashier1AttendingBuyer, jTextFieldCashier2AttendingBuyer, jTextFieldCheckAreaQueue, jTextFieldOusideQueue, monitor, log);
+        this.workSupermarket = new WorkoutSupermarket(log, monitor, supermarket);
     }
 
     /**
@@ -78,30 +58,16 @@ public class NewMain extends javax.swing.JFrame {
         jButtonStop = new javax.swing.JButton();
         jButtonResume = new javax.swing.JButton();
         jButtonComplete = new javax.swing.JButton();
+        jLabelBuyersShelvesNumber = new javax.swing.JLabel();
+        jTextFieldNumberPeopleShelves = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(1210, 505));
+        setResizable(false);
+        setSize(new java.awt.Dimension(1210, 505));
 
         jLabelOutsideQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelOutsideQueue.setText("People waiting to enter into the supermarket:");
-
-        /*jTextFieldOusideQueue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldOusideQueueActionPerformed(evt);
-            }
-        });
-
-        jTextFieldButcherShopQueue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldButcherShopQueueActionPerformed(evt);
-            }
-        });
-
-        jTextFieldFishShopQueue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldFishShopQueueActionPerformed(evt);
-            }
-        });*/
 
         jLabelOutsideQueueButcherShopQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelOutsideQueueButcherShopQueue.setText("People waiting at the butcher shop:");
@@ -112,56 +78,20 @@ public class NewMain extends javax.swing.JFrame {
         jLabelAttendingBuyerButcher.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelAttendingBuyerButcher.setText("Butcher attending to:");
 
-        /*jTextFieldAttendingBuyerButcher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAttendingBuyerButcherActionPerformed(evt);
-            }
-        });*/
-
         jLabelAttendingBuyerFishmonger.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelAttendingBuyerFishmonger.setText("Fishmonger attending to:");
-
-        /*jTextFieldAttendingBuyerFishmonger.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAttendingBuyerFishmongerActionPerformed(evt);
-            }
-        });*/
 
         jLabelBuyersShelves.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelBuyersShelves.setText("People at the items shelves:");
 
-        /*jTextFieldBuyersShelves.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldBuyersShelvesActionPerformed(evt);
-            }
-        });*/
-
         jLabelCheckAreaQueue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCheckAreaQueue.setText("People waiting at the check area:");
-
-        /*jTextFieldCheckAreaQueue.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCheckAreaQueueActionPerformed(evt);
-            }
-        });*/
 
         jLabelCashier1AttendingBuyer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCashier1AttendingBuyer.setText("Cashier 1 attending to:");
 
-        /*jTextFieldCashier1AttendingBuyer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCashier1AttendingBuyerActionPerformed(evt);
-            }
-        });*/
-
         jLabelCashier2AttendingBuyer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabelCashier2AttendingBuyer.setText("Cashier 2 attending to:");
-
-        /*jTextFieldCashier2AttendingBuyer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldCashier2AttendingBuyerActionPerformed(evt);
-            }
-        });*/
 
         jLabelOutsideQueue9.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabelOutsideQueue9.setText("Supermarket");
@@ -187,7 +117,7 @@ public class NewMain extends javax.swing.JFrame {
                 jButtonResumeActionPerformed(evt);
             }
         });
-        
+
         jButtonComplete.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonComplete.setText("Complete");
         jButtonComplete.setMaximumSize(new java.awt.Dimension(100, 23));
@@ -199,53 +129,61 @@ public class NewMain extends javax.swing.JFrame {
             }
         });
 
+        jLabelBuyersShelvesNumber.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabelBuyersShelvesNumber.setText("Number of people at the items shelves:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(487, 487, 487)
+                .addComponent(jLabelOutsideQueue9)
+                .addGap(487, 487, 487))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(200, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCheckAreaQueue)
-                    .addComponent(jLabelOutsideQueue)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextFieldOusideQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldButcherShopQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelOutsideQueueButcherShopQueue)
-                                .addComponent(jTextFieldAttendingBuyerButcher, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelAttendingBuyerButcher)
-                                .addComponent(jLabelBuyersShelves))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabelFishShopQueue)
-                                .addComponent(jTextFieldFishShopQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextFieldAttendingBuyerFishmonger, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelAttendingBuyerFishmonger)))
-                        .addComponent(jTextFieldBuyersShelves, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(120, 120, 120)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jTextFieldCheckAreaQueue)
+                    .addComponent(jLabelCheckAreaQueue, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelOutsideQueue, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelAttendingBuyerButcher)
+                            .addComponent(jTextFieldAttendingBuyerButcher, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelBuyersShelves)
+                            .addComponent(jLabelOutsideQueueButcherShopQueue)
+                            .addComponent(jTextFieldButcherShopQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(270, 270, 270)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelFishShopQueue)
+                            .addComponent(jTextFieldFishShopQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldAttendingBuyerFishmonger, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelAttendingBuyerFishmonger)))
+                    .addComponent(jTextFieldBuyersShelves, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(290, 290, 290)
                         .addComponent(jButtonStop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(jButtonComplete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addComponent(jButtonResume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTextFieldCashier1AttendingBuyer, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelCashier1AttendingBuyer))
-                            .addGap(100, 100, 100)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldCashier2AttendingBuyer, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabelCashier2AttendingBuyer)))
-                        .addComponent(jTextFieldCheckAreaQueue, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(200, 200, 200))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(482, 482, 482)
-                .addComponent(jLabelOutsideQueue9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(60, 60, 60)
+                                .addComponent(jTextFieldNumberPeopleShelves, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(60, 60, 60))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelCashier1AttendingBuyer)
+                                .addGap(227, 227, 227)
+                                .addComponent(jLabelBuyersShelvesNumber)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldCashier2AttendingBuyer, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCashier2AttendingBuyer)))
+                    .addComponent(jTextFieldOusideQueue))
+                .addGap(120, 120, 120))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,7 +198,7 @@ public class NewMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelOutsideQueueButcherShopQueue)
                     .addComponent(jLabelFishShopQueue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldButcherShopQueue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldFishShopQueue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -281,28 +219,32 @@ public class NewMain extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabelCheckAreaQueue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldCheckAreaQueue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextFieldCheckAreaQueue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
                         .addComponent(jLabelCashier1AttendingBuyer)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCashier1AttendingBuyer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldCashier1AttendingBuyer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNumberPeopleShelves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelCashier2AttendingBuyer)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelCashier2AttendingBuyer)
+                            .addComponent(jLabelBuyersShelvesNumber))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldCashier2AttendingBuyer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonStop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonResume, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonComplete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+                .addGap(20, 20, 20))
         );
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>                        
+    }// </editor-fold>
 
     private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {                                            
         // TODO add your handling code here:
@@ -355,14 +297,14 @@ public class NewMain extends javax.swing.JFrame {
             }
         });
     }
-
-    // Variables declaration - do not modify   
+    // Variables declaration - do not modify                     
     private javax.swing.JButton jButtonComplete;
     private javax.swing.JButton jButtonResume;
     private javax.swing.JButton jButtonStop;
     private javax.swing.JLabel jLabelAttendingBuyerButcher;
     private javax.swing.JLabel jLabelAttendingBuyerFishmonger;
     private javax.swing.JLabel jLabelBuyersShelves;
+    private javax.swing.JLabel jLabelBuyersShelvesNumber;
     private javax.swing.JLabel jLabelCashier1AttendingBuyer;
     private javax.swing.JLabel jLabelCashier2AttendingBuyer;
     private javax.swing.JLabel jLabelCheckAreaQueue;
@@ -378,10 +320,7 @@ public class NewMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCashier2AttendingBuyer;
     private javax.swing.JTextField jTextFieldCheckAreaQueue;
     private javax.swing.JTextField jTextFieldFishShopQueue;
+    private javax.swing.JTextField jTextFieldNumberPeopleShelves;
     private javax.swing.JTextField jTextFieldOusideQueue;
     // End of variables declaration                   
-
-    private void Sleep(double d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
