@@ -5,6 +5,8 @@
  */
 package cal3;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author Sergio
@@ -24,6 +26,10 @@ public class Counter {
         this.counter = counter;
     }
     
+    public synchronized void setCounter(int counter, JTextField text) {
+        this.counter = counter;
+        text.setText(Integer.toString(counter));
+    }
     
     
 }
