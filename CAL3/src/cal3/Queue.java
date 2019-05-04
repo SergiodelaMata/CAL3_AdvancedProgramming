@@ -84,4 +84,8 @@ public class Queue {
         return text;
     }
     
+    public synchronized String getBuyerId(int number)
+    {
+        return queue.get(number);
+    }
 }
