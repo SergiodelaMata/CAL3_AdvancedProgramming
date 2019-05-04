@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package cal3;
-
-import static java.lang.Thread.sleep;
 /**
  *
  * @author Sergio
@@ -15,16 +13,18 @@ public class NewMain extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private Monitor monitor;
-    private WorkoutSupermarket workSupermarket;
+    private OperationSupermarket workSupermarket;
     private LoggerThread log;
     private Supermarket supermarket;
+    private RevisorStateCheckArea revisorCheckArea;
     
     public NewMain() {
         initComponents();
         this.monitor = new Monitor();
         this.log = new LoggerThread();
         this.supermarket = new Supermarket(jTextFieldAttendingBuyerButcher, jTextFieldAttendingBuyerFishmonger, jTextFieldButcherShopQueue, jTextFieldFishShopQueue, jTextFieldBuyersShelves, jTextFieldNumberPeopleShelves, jTextFieldCashier1AttendingBuyer, jTextFieldCashier2AttendingBuyer, jTextFieldCheckAreaQueue, jTextFieldOusideQueue, monitor, log);
-        this.workSupermarket = new WorkoutSupermarket(log, monitor, supermarket);
+        this.workSupermarket = new OperationSupermarket(log, monitor, supermarket);
+        this.revisorCheckArea = new RevisorStateCheckArea(monitor, supermarket);
     }
 
     /**
