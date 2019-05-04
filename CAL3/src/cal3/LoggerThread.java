@@ -2,13 +2,9 @@ package cal3;
 
 
 import java.util.ArrayList;
-import java.util.concurrent.Semaphore;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Level;
 
 public class LoggerThread extends Thread {
 	
@@ -17,22 +13,18 @@ public class LoggerThread extends Thread {
 	private SimpleFormatter sf;
         private ArrayList<String> information;
         private Counter counter;
-        //private int counter;
-        //private Lock lock;
-        
         
 	public LoggerThread()
         {
             try
             {
                 this.logger = Logger.getLogger("MyLog");
-                this.fh = new FileHandler("C:/Users/Sergio/Desktop/log.txt");
+                this.fh = new FileHandler("log.txt");
                 logger.addHandler(fh);
                 this.sf = new SimpleFormatter();
                 fh.setFormatter(sf);
                 information = new ArrayList<>();
                 this.counter = new Counter();
-                //lock = new ReentrantLock();
                 this.start();
             }
             catch (Exception e)
@@ -45,34 +37,20 @@ public class LoggerThread extends Thread {
             {
                 if(counter.getCounter() < information.size())
                 {
-                    //System.out.println(counter + " " + information.size());
-                    /*try
-                    {
-                        lock.lock();*/
                         write(counter.getCounter());
                         counter.setCounter(counter.getCounter()+1);
-                    /*}
-                    finally
-                    {
-                        lock.unlock();
-                    }*/
-                    
-                    //System.out.println("Dentro " + counter.getCounter());
                 }
-                //System.out.println(counter.getCounter());
             }
         }
         
         public synchronized void write(int counter)
         {
-            //System.out.println("hola");
             logger.info(information.get(counter));
         }
         
         public synchronized void log (String s)
         {
             information.add(s);
-            //System.out.println(information.size());
 	}
         
         public synchronized int getCounter()
@@ -89,8 +67,4 @@ public class LoggerThread extends Thread {
         {
             return information.get(i-1);
         }
-
-    /*private void Sleep(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
 }

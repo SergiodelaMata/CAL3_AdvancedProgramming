@@ -5,11 +5,6 @@
  */
 package cal3;
 
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Sergio
@@ -32,7 +27,6 @@ public class Buyer extends Thread{
     
     public void run()
     {
-        //int randNumber;
         int randNumber;
         long enterTime = 0;
         boolean attended = false;
@@ -90,44 +84,6 @@ public class Buyer extends Thread{
             log.log("Total number of people who have left the supermarket: " + supermarket.getCounterBuyerExit().getCounter());
             log.log("Average time from a buyer since he/she arrives at the outside queue until he/she leaves the supermarket: " + supermarket.counterAverageServiceTime(supermarket.getTimeWaitOutsideQueueAndLeaveList()) + "ms");
             log.log("Average time from a buyer since he/she enters the supermarket until he/she leaves the supermarket: " + supermarket.counterAverageServiceTime(supermarket.getTimeEnterAndLeaveList()) + "ms");
-            /*while(log.getCounter() < log.length())
-            {
-                System.out.println(log.getCounter() + " de " + log.length());
-                //System.out.print(log.getData(log.getCounter()));
-            }*/
         }
-        
-        //supermarket.enterSupermarket(idBuyer);
-        
-        /*try {
-            sleep(5000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Buyer.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        /*randNumber = (int) (Math.random()*3);
-        if(randNumber == 0)
-        {
-            supermarket.goButcherShop(idBuyer);
-        }
-        else if(randNumber == 1)
-        {
-            supermarket.goFishShop(idBuyer);
-        }
-        else
-        {
-            supermarket.goItemShelves(idBuyer);
-        }
-        try {
-            sleep(5000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Buyer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        supermarket.payShopping(idBuyer);*/
-        /*try {
-            sleep(5000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Buyer.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        /*supermarket.exitSupermarket(idBuyer);*/
     }
 }
