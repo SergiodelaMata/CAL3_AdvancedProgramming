@@ -30,6 +30,4 @@ public class Counter {
         this.counter = counter;
         text.setText(Integer.toString(counter));
     }
-    
-    
 }

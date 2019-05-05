@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LoggerThread.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CAL3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">cal3</a> &gt; <span class="el_source">LoggerThread.java</span></div><h1>LoggerThread.java</h1><pre class="source lang-java linenums">package cal3;
+
+
+import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+
+public class LoggerThread extends Thread {
+	
+	private Logger logger;
+	private FileHandler fh;
+	private SimpleFormatter sf;
+        private ArrayList&lt;String&gt; information;
+        private Counter counter;
+        //private int counter;
+        //private Lock lock;
+        
+        
+	public LoggerThread()
+<span class="fc" id="L25">        {</span>
+            try
+            {
+<span class="fc" id="L28">                this.logger = Logger.getLogger(&quot;MyLog&quot;);</span>
+<span class="fc" id="L29">                this.fh = new FileHandler(&quot;log.txt&quot;);</span>
+<span class="fc" id="L30">                logger.addHandler(fh);</span>
+<span class="fc" id="L31">                this.sf = new SimpleFormatter();</span>
+<span class="fc" id="L32">                fh.setFormatter(sf);</span>
+<span class="fc" id="L33">                information = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L34">                this.counter = new Counter();</span>
+                //lock = new ReentrantLock();
+<span class="fc" id="L36">                this.start();</span>
+            }
+<span class="nc" id="L38">            catch (Exception e)</span>
+            {
+<span class="fc" id="L40">            }</span>
+<span class="fc" id="L41">	}</span>
+	public void run()
+        {
+            while(true)
+            {
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                if(counter.getCounter() &lt; information.size())</span>
+                {
+                    //System.out.println(counter + &quot; &quot; + information.size());
+                    /*try
+                    {
+                        lock.lock();*/
+<span class="fc" id="L52">                        write(counter.getCounter());</span>
+<span class="fc" id="L53">                        counter.setCounter(counter.getCounter()+1);</span>
+                    /*}
+                    finally
+                    {
+                        lock.unlock();
+                    }*/
+                    
+                    //System.out.println(&quot;Dentro &quot; + counter.getCounter());
+                }
+                //System.out.println(counter.getCounter());
+            }
+        }
+        
+        public synchronized void write(int counter)
+        {
+            //System.out.println(&quot;hola&quot;);
+<span class="fc" id="L69">            logger.info(information.get(counter));</span>
+<span class="fc" id="L70">        }</span>
+        
+        public synchronized void log (String s)
+        {
+<span class="fc" id="L74">            information.add(s);</span>
+            //System.out.println(information.size());
+<span class="fc" id="L76">	}</span>
+        
+        public synchronized int getCounter()
+        {
+<span class="nc" id="L80">            return counter.getCounter();</span>
+        }
+        
+        public synchronized int length()
+        {
+<span class="nc" id="L85">            return information.size();</span>
+        }
+        
+        public synchronized String getData(int i)
+        {
+<span class="nc" id="L90">            return information.get(i-1);</span>
+        }
+
+    /*private void Sleep(int i) {
+        throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); //To change body of generated methods, choose Tools | Templates.
+    }*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

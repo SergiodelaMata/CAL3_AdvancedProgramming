@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Queue.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CAL3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">cal3</a> &gt; <span class="el_source">Queue.java</span></div><h1>Queue.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cal3;
+
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author Sergio
+ */
+public class Queue {
+<span class="fc" id="L17">    private ArrayList&lt;String&gt; queue = new ArrayList&lt;String&gt;();</span>
+    private int numBuyers;
+    private int totalBuyers;
+    private JTextField text;
+    private Monitor monitor;
+
+<span class="fc" id="L23">    public Queue(JTextField text, Monitor monitor) {</span>
+<span class="fc" id="L24">        this.text = text;</span>
+<span class="fc" id="L25">        this.monitor = monitor;</span>
+<span class="fc" id="L26">        this.numBuyers = 0;</span>
+<span class="fc" id="L27">        this.totalBuyers = 0;</span>
+<span class="fc" id="L28">    }</span>
+    
+    public synchronized void push(String id)//To add an element to a queue
+    {
+        //queue.add(lengthQueue(), id);
+<span class="fc" id="L33">        queue.add(id);</span>
+<span class="fc" id="L34">        this.print();</span>
+<span class="fc" id="L35">    }</span>
+    public synchronized String pop(String id)//To eliminate an element of a queue
+    {
+<span class="fc" id="L38">        String s = queue.get(0);</span>
+<span class="fc" id="L39">        queue.remove(0);</span>
+<span class="fc" id="L40">        this.print();</span>
+<span class="fc" id="L41">        return s;</span>
+    }
+    public synchronized void remove(String id)//To eliminate an element of a queue
+    {
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for(int i = 0; i &lt; queue.size(); i++)</span>
+        {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            if(queue.get(i).equals(id))</span>
+            {
+<span class="fc" id="L49">                queue.remove(i);</span>
+            }
+        }
+<span class="fc" id="L52">        this.print();</span>
+<span class="fc" id="L53">    }</span>
+        
+    public synchronized String top()// To eliminate an element of a queue
+    {
+<span class="nc" id="L57">        return queue.get(0);</span>
+    }
+    
+    public void print()//To show the result of a queue in an instant of time at their User Interface
+    {
+<span class="fc" id="L62">        String textVisitors = &quot; &quot;;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        for(int i = 0; i &lt; queue.size(); i++)</span>
+        {
+<span class="fc" id="L65">            textVisitors+= &quot; &quot; + queue.get(i);</span>
+        }
+<span class="fc" id="L67">        text.setText(textVisitors);</span>
+<span class="fc" id="L68">    }</span>
+    
+    public int lengthQueue()//To get the actual length of a queue
+    {
+<span class="fc" id="L72">        return queue.size();</span>
+    }
+
+    public void cleanQueue() //Makes the buyers leave the queue
+    {
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        for(int i = 0; i &lt; queue.size(); i++)</span>
+        {
+<span class="nc" id="L79">            queue.remove(0);</span>
+        }
+<span class="nc" id="L81">    }</span>
+    public JTextField getTextField()
+    {
+<span class="fc" id="L84">        return text;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

@@ -6,7 +6,7 @@
 package cal3;
 /**
  *
- * @author Sergio
+ * @author Manuel & Sergio
  */
 public class NewMain extends javax.swing.JFrame {
     /**

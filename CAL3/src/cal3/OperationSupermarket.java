@@ -1,13 +1,7 @@
 package cal3;
 
 
-import cal3.Buyer;
-import cal3.LoggerThread;
-import cal3.Monitor;
-import cal3.Server;
-import cal3.Supermarket;
 import static java.lang.Thread.sleep;
-import javax.swing.JTextField;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -39,10 +33,8 @@ public class OperationSupermarket extends Thread{
     {
         while(counter <= 100)
         {
-            //System.out.println("hi");
             if(!monitor.isStopThread())
             {
-                //System.out.println("Entering " + counter);
                     try
                     {
                         sleep((long) (800*Math.random() + 200));
@@ -60,6 +52,4 @@ public class OperationSupermarket extends Thread{
             }
         }
     }
-    
-    
 }

@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Monitor.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CAL3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">cal3</a> &gt; <span class="el_source">Monitor.java</span></div><h1>Monitor.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cal3;
+
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author Sergio
+ */
+public class Monitor {
+    private boolean stopThread;
+    private boolean stopButcher;
+    private boolean stopFishmonger;
+    private boolean stopCashier;
+    private boolean endBuyingMeat;
+    private boolean endBuyingFish;
+    private boolean endBuying;
+    private boolean butcherWait;
+    private boolean fishmongerWait;
+    private boolean cashierWait;
+    private boolean complete;
+    //private boolean canWrite;
+    //private boolean finishWrite;
+<span class="fc" id="L28">    private String [] buyerIdList = {&quot;&quot;, &quot;&quot;};</span>
+    
+    
+    public Monitor()
+<span class="fc" id="L32">    {</span>
+<span class="fc" id="L33">        this.stopThread = false;</span>
+<span class="fc" id="L34">        this.stopButcher = false;</span>
+<span class="fc" id="L35">        this.stopFishmonger = false;</span>
+<span class="fc" id="L36">        this.stopCashier = false;</span>
+<span class="fc" id="L37">        this.endBuyingMeat = false;</span>
+<span class="fc" id="L38">        this.endBuyingFish = false;</span>
+<span class="fc" id="L39">        this.endBuying = false;</span>
+<span class="fc" id="L40">        this.butcherWait = true;</span>
+<span class="fc" id="L41">        this.fishmongerWait = true;</span>
+<span class="fc" id="L42">        this.cashierWait = true;</span>
+<span class="fc" id="L43">        this.complete = false;</span>
+        //this.canWrite = false;
+        //this.finishWrite = false;
+<span class="fc" id="L46">    }</span>
+
+    public synchronized void waitResume()//To make the threads wait until the resume Button is pressed
+    {
+        try
+        {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            while(stopThread)</span>
+            {
+<span class="fc" id="L54">                wait();</span>
+            }
+        }
+<span class="nc" id="L57">        catch(Exception e)</span>
+        {
+<span class="fc" id="L59">        }</span>
+<span class="fc" id="L60">    }</span>
+    
+    public synchronized void waitButcher()
+    {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        while(stopButcher)</span>
+        {
+            try
+            {
+<span class="nc" id="L68">                wait();</span>
+            }
+<span class="nc" id="L70">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L73">            }</span>
+        }
+<span class="nc" id="L75">    }</span>
+    
+    public synchronized void waitFishmonger()
+    {
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        while(stopFishmonger)</span>
+        {
+            try
+            {
+<span class="nc" id="L83">                wait();</span>
+            }
+<span class="nc" id="L85">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L88">            }</span>
+        }
+<span class="nc" id="L90">    }</span>
+    
+    public synchronized void waitCashier()
+    {
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        while(stopCashier)</span>
+        {
+            try
+            {
+<span class="nc" id="L98">                wait();</span>
+            }
+<span class="nc" id="L100">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L103">            }</span>
+        }
+<span class="nc" id="L105">    }</span>
+    
+    public synchronized void waitBuyingMeat()
+    {
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">        while(endBuyingMeat)</span>
+        {
+            try
+            {
+<span class="nc" id="L113">                wait();</span>
+            }
+<span class="nc" id="L115">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L118">            }</span>
+        }
+<span class="fc" id="L120">    }</span>
+    
+    public synchronized void waitBuyingFish()
+    {
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">        while(endBuyingFish)</span>
+        {
+            try
+            {
+<span class="nc" id="L128">                wait();</span>
+            }
+<span class="nc" id="L130">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L133">            }</span>
+        }
+<span class="fc" id="L135">    }</span>
+    
+    public synchronized void waitEndBuying(String idBuyer, int idCashier)
+    {
+<span class="pc bpc" id="L139" title="2 of 4 branches missed.">        while(!endBuying &amp;&amp; buyerIdList[idCashier - 1] == idBuyer)</span>
+        {
+            try
+            {
+<span class="nc" id="L143">                wait();</span>
+            }
+<span class="nc" id="L145">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L148">            }</span>
+        }
+<span class="fc" id="L150">    }</span>
+    
+    public synchronized void waitIfDifferentIdBuyerEnterSupermarket(String idBuyer, Queue queue, Counter counter)
+    {
+        try
+        {
+            
+<span class="nc bnc" id="L157" title="All 6 branches missed.">            while((!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 20) &amp;&amp; !complete)</span>
+            {
+<span class="nc" id="L159">                wait();</span>
+            }
+        }
+<span class="fc" id="L162">        catch(Exception e)</span>
+        {
+            
+<span class="nc" id="L165">        }</span>
+        //System.out.println(idBuyer);
+<span class="fc" id="L167">    }</span>
+    
+    public synchronized String topText(JTextField text)
+    {
+<span class="fc" id="L171">        String idBuyer  = &quot;&quot;;</span>
+<span class="fc" id="L172">        char [] idBuyers = (text.getText()).toCharArray();</span>
+        //System.out.println(idBuyers);
+<span class="fc" id="L174">        int i = 2;</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">        if(idBuyers.length == 0)</span>
+        {
+<span class="fc" id="L177">            idBuyer = &quot;-1&quot;;</span>
+        }
+        else
+        {
+<span class="fc bfc" id="L181" title="All 4 branches covered.">            while(idBuyers[i] != ' ' || idBuyers[i-1] == 'r')</span>
+            {
+                //System.out.println(i + &quot; &quot; + idBuyers[i]);
+<span class="fc" id="L184">                idBuyer += idBuyers[i];</span>
+<span class="fc" id="L185">                i++;</span>
+            }
+        }
+        //System.out.println(idBuyer);
+<span class="fc" id="L189">        return idBuyer;</span>
+    }
+    
+    public synchronized void waitIfDifferentIdBuyerButcher(String idBuyer, Queue queue, Counter counter)
+    {
+        try
+        {
+            
+<span class="pc bpc" id="L197" title="1 of 6 branches missed.">            while((!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 1) &amp;&amp; !complete)</span>
+            {
+<span class="fc" id="L199">                wait();</span>
+            }
+        }
+<span class="fc" id="L202">        catch(Exception e)</span>
+        {
+            
+<span class="fc" id="L205">        }</span>
+<span class="fc" id="L206">        System.out.println(idBuyer);</span>
+<span class="fc" id="L207">    }</span>
+    
+    public synchronized void waitIfDifferentIdBuyerEnterFishmonger(String idBuyer, Queue queue, Counter counter)
+    {
+        try
+        {
+            
+<span class="nc bnc" id="L214" title="All 6 branches missed.">            while((!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 1) &amp;&amp; !complete)</span>
+            {
+<span class="nc" id="L216">                wait();</span>
+            }
+        }
+<span class="fc" id="L219">        catch(Exception e)</span>
+        {
+            
+<span class="nc" id="L222">        }</span>
+<span class="fc" id="L223">        System.out.println(idBuyer);</span>
+<span class="fc" id="L224">    }</span>
+    
+    public synchronized void waitIfDifferentIdBuyerEnterCashier(String idBuyer, Queue queue, Counter counter)
+    {
+        try
+        {
+            
+<span class="fc bfc" id="L231" title="All 4 branches covered.">            while(!idBuyer.equals(topText(queue.getTextField())) || counter.getCounter() == 2)</span>
+            {
+<span class="fc" id="L233">                wait();</span>
+            }
+        }
+<span class="fc" id="L236">        catch(Exception e)</span>
+        {
+            
+<span class="fc" id="L239">        }</span>
+<span class="fc" id="L240">        System.out.println(idBuyer);</span>
+<span class="fc" id="L241">    }</span>
+    
+    public synchronized void makeButcherWait()
+    {
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        while(butcherWait)</span>
+        {
+            try
+            {
+<span class="nc" id="L249">                wait();</span>
+            }
+<span class="nc" id="L251">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L254">            }</span>
+        }
+<span class="nc" id="L256">    }</span>
+    
+    public synchronized void makeFishmongerWait()
+    {
+<span class="nc bnc" id="L260" title="All 2 branches missed.">        while(fishmongerWait)</span>
+        {
+            try
+            {
+<span class="nc" id="L264">                wait();</span>
+            }
+<span class="nc" id="L266">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L269">            }</span>
+        }
+<span class="nc" id="L271">    }</span>
+    
+    public synchronized void makeCashierWait()
+    {
+<span class="nc bnc" id="L275" title="All 2 branches missed.">        while(cashierWait)</span>
+        {
+            try
+            {
+<span class="nc" id="L279">                wait();</span>
+            }
+<span class="nc" id="L281">            catch(Exception e)</span>
+            {
+                
+<span class="nc" id="L284">            }</span>
+        }
+<span class="nc" id="L286">    }</span>
+    
+    /*public synchronized void waitToWrite()
+    {
+        while(!canWrite)
+        {
+            try
+            {
+                wait();
+            }
+            catch(Exception e)
+            {
+                
+            }
+        }
+    }
+    
+    public synchronized void waitToFinishWrite()
+    {
+        while(!finishWrite)
+        {
+            try
+            {
+                wait();
+            }
+            catch(Exception e)
+            {
+                
+            }
+        }
+    }*/
+    
+    public synchronized boolean isStopThread()//To know if the &quot;Resume&quot; Button has been activated
+    {
+<span class="fc" id="L320">        return stopThread;</span>
+    }
+    
+    public synchronized void setStopThread(boolean stopThread)//To set the value of the condition from the monitor
+    {
+<span class="fc" id="L325">        this.stopThread = stopThread;</span>
+<span class="fc" id="L326">    }</span>
+
+    public synchronized boolean isStopButcher() {
+<span class="fc" id="L329">        return stopButcher;</span>
+    }
+
+    public synchronized void setStopButcher(boolean stopButcher) {
+<span class="nc" id="L333">        this.stopButcher = stopButcher;</span>
+<span class="nc" id="L334">    }</span>
+
+    public synchronized boolean isStopFishmonger() {
+<span class="fc" id="L337">        return stopFishmonger;</span>
+    }
+
+    public synchronized void setStopFishmonger(boolean stopFishmonger) {
+<span class="nc" id="L341">        this.stopFishmonger = stopFishmonger;</span>
+<span class="nc" id="L342">    }</span>
+
+    public synchronized boolean isStopCashier() {
+<span class="nc" id="L345">        return stopCashier;</span>
+    }
+
+    public synchronized void setStopCashier(boolean stopCashier) {
+<span class="nc" id="L349">        this.stopCashier = stopCashier;</span>
+<span class="nc" id="L350">    }</span>
+
+    public synchronized boolean isEndBuyingMeat() {
+<span class="nc" id="L353">        return endBuyingMeat;</span>
+    }
+
+    public synchronized void setEndBuyingMeat(boolean endBuyingMeat) {
+<span class="nc" id="L357">        this.endBuyingMeat = endBuyingMeat;</span>
+<span class="nc" id="L358">    }</span>
+
+    public synchronized boolean isEndBuyingFish() {
+<span class="nc" id="L361">        return endBuyingFish;</span>
+    }
+
+    public synchronized void setEndBuyingFish(boolean endBuyingFish) {
+<span class="nc" id="L365">        this.endBuyingFish = endBuyingFish;</span>
+<span class="nc" id="L366">    }</span>
+
+    public synchronized boolean isEndBuying() {
+<span class="nc" id="L369">        return endBuying;</span>
+    }
+
+    public synchronized void setEndBuying(boolean endBuying) {
+<span class="nc" id="L373">        this.endBuying = endBuying;</span>
+<span class="nc" id="L374">    }</span>
+
+    public synchronized boolean isButcherWait() {
+<span class="fc" id="L377">        return butcherWait;</span>
+    }
+
+    public synchronized void setButcherWait(boolean butcherWait) {
+<span class="fc" id="L381">        this.butcherWait = butcherWait;</span>
+<span class="fc" id="L382">    }</span>
+
+    public synchronized boolean isFishmongerWait() {
+<span class="fc" id="L385">        return fishmongerWait;</span>
+    }
+
+    public synchronized void setFishmongerWait(boolean fishmongerWait) {
+<span class="fc" id="L389">        this.fishmongerWait = fishmongerWait;</span>
+<span class="fc" id="L390">    }</span>
+
+    public synchronized boolean isCashierWait() {
+<span class="fc" id="L393">        return cashierWait;</span>
+    }
+
+    public synchronized void setCashierWait(boolean cashierWait) {
+<span class="fc" id="L397">        this.cashierWait = cashierWait;</span>
+<span class="fc" id="L398">    }</span>
+    
+    public synchronized void setBuyerId(String buyerId, int id) {
+<span class="nc" id="L401">        this.buyerIdList[id] = buyerId;</span>
+<span class="nc" id="L402">    }</span>
+
+    public synchronized boolean isComplete() {
+<span class="fc" id="L405">        return complete;</span>
+    }
+
+    public synchronized void setComplete(boolean complete) {
+<span class="fc" id="L409">        this.complete = complete;</span>
+<span class="fc" id="L410">    }</span>
+
+    /*public synchronized boolean isCanWrite() {
+        System.out.println(&quot;hhoo&quot;);
+        return canWrite;
+    }
+
+    public synchronized void setCanWrite(boolean canWrite) {
+        this.canWrite = canWrite;
+    }
+
+    public synchronized boolean isFinishWrite() {
+        return finishWrite;
+    }
+
+    public synchronized void setFinishWrite(boolean finishWrite) {
+        this.finishWrite = finishWrite;
+    }*/
+    
+    public synchronized void activeThread()//To tell the threads inside the monitor to look if the &quot;Resume&quot; Button has been pressed
+    {
+<span class="fc" id="L431">        notifyAll();</span>
+<span class="fc" id="L432">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

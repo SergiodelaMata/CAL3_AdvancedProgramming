@@ -41,6 +41,4 @@ public class CheckArea {
     public void setPayQueue(Queue payQueue) {
         this.payQueue = payQueue;
     }
-    
-    
 }

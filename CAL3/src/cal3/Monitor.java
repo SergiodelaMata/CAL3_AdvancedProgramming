@@ -23,8 +23,6 @@ public class Monitor {
     private boolean fishmongerWait;
     private boolean cashierWait;
     private boolean complete;
-    //private boolean canWrite;
-    //private boolean finishWrite;
     private String [] buyerIdList = {"", ""};
     
     
@@ -41,8 +39,6 @@ public class Monitor {
         this.fishmongerWait = true;
         this.cashierWait = true;
         this.complete = false;
-        //this.canWrite = false;
-        //this.finishWrite = false;
     }
 
     public synchronized void waitResume()//To make the threads wait until the resume Button is pressed
@@ -285,36 +281,6 @@ public class Monitor {
         }
     }
     
-    /*public synchronized void waitToWrite()
-    {
-        while(!canWrite)
-        {
-            try
-            {
-                wait();
-            }
-            catch(Exception e)
-            {
-                
-            }
-        }
-    }
-    
-    public synchronized void waitToFinishWrite()
-    {
-        while(!finishWrite)
-        {
-            try
-            {
-                wait();
-            }
-            catch(Exception e)
-            {
-                
-            }
-        }
-    }*/
-    
     public synchronized boolean isStopThread()//To know if the "Resume" Button has been activated
     {
         return stopThread;
@@ -408,23 +374,6 @@ public class Monitor {
     public synchronized void setComplete(boolean complete) {
         this.complete = complete;
     }
-
-    /*public synchronized boolean isCanWrite() {
-        System.out.println("hhoo");
-        return canWrite;
-    }
-
-    public synchronized void setCanWrite(boolean canWrite) {
-        this.canWrite = canWrite;
-    }
-
-    public synchronized boolean isFinishWrite() {
-        return finishWrite;
-    }
-
-    public synchronized void setFinishWrite(boolean finishWrite) {
-        this.finishWrite = finishWrite;
-    }*/
     
     public synchronized void activeThread()//To tell the threads inside the monitor to look if the "Resume" Button has been pressed
     {

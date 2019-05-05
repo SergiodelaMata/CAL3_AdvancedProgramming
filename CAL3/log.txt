@@ -1,522 +1,214 @@
-may 04, 2019 4:46:07 PM cal3.LoggerThread write
+may 05, 2019 1:27:13 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 1 enters the supermarket
-may 04, 2019 4:46:07 PM cal3.LoggerThread write
+may 05, 2019 1:27:13 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 1 waits at the fishmonger shop
-may 04, 2019 4:46:07 PM cal3.LoggerThread write
+may 05, 2019 1:27:13 PM cal3.LoggerThread write
 INFORMACIÓN: Fishmonger attends Buyer 1
-may 04, 2019 4:46:07 PM cal3.LoggerThread write
+may 05, 2019 1:27:13 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 2 enters the supermarket
-may 04, 2019 4:46:07 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 2 waits at the fishmonger shop
-may 04, 2019 4:46:08 PM cal3.LoggerThread write
+may 05, 2019 1:27:13 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 2 picks items from the item shelves
+may 05, 2019 1:27:13 PM cal3.LoggerThread write
+INFORMACIÓN: 1 people picking items from the item shelves
+may 05, 2019 1:27:14 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 3 enters the supermarket
-may 04, 2019 4:46:08 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 3 waits at the butcher shop
-may 04, 2019 4:46:08 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 3
-may 04, 2019 4:46:08 PM cal3.LoggerThread write
+may 05, 2019 1:27:14 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 3 picks items from the item shelves
+may 05, 2019 1:27:14 PM cal3.LoggerThread write
+INFORMACIÓN: 2 people picking items from the item shelves
+may 05, 2019 1:27:15 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 4 enters the supermarket
-may 04, 2019 4:46:08 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 4 waits at the butcher shop
-may 04, 2019 4:46:09 PM cal3.LoggerThread write
+may 05, 2019 1:27:15 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 4 waits at the fishmonger shop
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 5 enters the supermarket
-may 04, 2019 4:46:09 PM cal3.LoggerThread write
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 5 picks items from the item shelves
-may 04, 2019 4:46:09 PM cal3.LoggerThread write
-INFORMACIÓN: 1 people picking items from the item shelves
-may 04, 2019 4:46:10 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 3 waits at the checkout area
-may 04, 2019 4:46:10 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 4
-may 04, 2019 4:46:10 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 3
-may 04, 2019 4:46:10 PM cal3.LoggerThread write
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
+INFORMACIÓN: 3 people picking items from the item shelves
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 6 enters the supermarket
-may 04, 2019 4:46:10 PM cal3.LoggerThread write
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 6 waits at the fishmonger shop
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 4 waits at the checkout area
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 5 has finished picking items from the item shelves
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: 0 people picking items from the item shelves
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 3 exits the supermarket
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 4
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 7 enters the supermarket
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Fishmonger attends Buyer 2
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 1 waits at the checkout area
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 1
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 7 waits at the fishmonger shop
-may 04, 2019 4:46:16 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 5 waits at the checkout area
-may 04, 2019 4:46:17 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 8 enters the supermarket
-may 04, 2019 4:46:17 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 8 waits at the butcher shop
-may 04, 2019 4:46:17 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 8
-may 04, 2019 4:46:18 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 9 enters the supermarket
-may 04, 2019 4:46:18 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 9 picks items from the item shelves
-may 04, 2019 4:46:18 PM cal3.LoggerThread write
-INFORMACIÓN: 1 people picking items from the item shelves
-may 04, 2019 4:46:18 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 10 enters the supermarket
-may 04, 2019 4:46:18 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 10 waits at the fishmonger shop
-may 04, 2019 4:46:18 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 11 enters the supermarket
-may 04, 2019 4:46:18 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 11 waits at the fishmonger shop
-may 04, 2019 4:46:19 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 8 waits at the checkout area
-may 04, 2019 4:46:19 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 4 exits the supermarket
-may 04, 2019 4:46:19 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 5
-may 04, 2019 4:46:19 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 12 enters the supermarket
-may 04, 2019 4:46:19 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 12 picks items from the item shelves
-may 04, 2019 4:46:19 PM cal3.LoggerThread write
-INFORMACIÓN: 2 people picking items from the item shelves
-may 04, 2019 4:46:20 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 13 enters the supermarket
-may 04, 2019 4:46:20 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 13 picks items from the item shelves
-may 04, 2019 4:46:20 PM cal3.LoggerThread write
-INFORMACIÓN: 3 people picking items from the item shelves
-may 04, 2019 4:46:20 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 14 enters the supermarket
-may 04, 2019 4:46:20 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 14 picks items from the item shelves
-may 04, 2019 4:46:20 PM cal3.LoggerThread write
-INFORMACIÓN: 4 people picking items from the item shelves
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 2 waits at the checkout area
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
-INFORMACIÓN: Fishmonger attends Buyer 6
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
+INFORMACIÓN: Fishmonger attends Buyer 4
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 1
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 1 exits the supermarket
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 8
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 15 enters the supermarket
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 15 picks items from the item shelves
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
-INFORMACIÓN: 5 people picking items from the item shelves
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 9 has finished picking items from the item shelves
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
-INFORMACIÓN: 4 people picking items from the item shelves
-may 04, 2019 4:46:21 PM cal3.LoggerThread write
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 7 enters the supermarket
+may 05, 2019 1:27:16 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 7 waits at the fishmonger shop
+may 05, 2019 1:27:17 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 8 enters the supermarket
+may 05, 2019 1:27:17 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 8 waits at the fishmonger shop
+may 05, 2019 1:27:18 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 9 enters the supermarket
+may 05, 2019 1:27:18 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 9 waits at the butcher shop
+may 05, 2019 1:27:18 PM cal3.LoggerThread write
+INFORMACIÓN: Butcher attends Buyer 9
+may 05, 2019 1:27:18 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 10 enters the supermarket
+may 05, 2019 1:27:18 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 10 waits at the butcher shop
+may 05, 2019 1:27:19 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 11 enters the supermarket
+may 05, 2019 1:27:19 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 11 waits at the butcher shop
+may 05, 2019 1:27:19 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 9 waits at the checkout area
-may 04, 2019 4:46:22 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 16 enters the supermarket
-may 04, 2019 4:46:22 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 16 waits at the fishmonger shop
-may 04, 2019 4:46:22 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 17 enters the supermarket
-may 04, 2019 4:46:22 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 17 waits at the fishmonger shop
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 18 enters the supermarket
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 18 waits at the butcher shop
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 18
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 12 has finished picking items from the item shelves
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: 3 people picking items from the item shelves
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 12 waits at the checkout area
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 19 enters the supermarket
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 19 waits at the butcher shop
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 5 exits the supermarket
-may 04, 2019 4:46:23 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 2
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 20 enters the supermarket
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 20 picks items from the item shelves
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: 4 people picking items from the item shelves
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 8 exits the supermarket
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 9
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 21 enters the supermarket
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 21 picks items from the item shelves
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: 5 people picking items from the item shelves
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 22 enters the supermarket
-may 04, 2019 4:46:24 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 22 waits at the fishmonger shop
-may 04, 2019 4:46:25 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 6 waits at the checkout area
-may 04, 2019 4:46:25 PM cal3.LoggerThread write
-INFORMACIÓN: Fishmonger attends Buyer 7
-may 04, 2019 4:46:25 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 20 has finished picking items from the item shelves
-may 04, 2019 4:46:25 PM cal3.LoggerThread write
-INFORMACIÓN: 4 people picking items from the item shelves
-may 04, 2019 4:46:25 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 20 waits at the checkout area
-may 04, 2019 4:46:25 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 23 enters the supermarket
-may 04, 2019 4:46:25 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 23 waits at the butcher shop
-may 04, 2019 4:46:26 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 13 has finished picking items from the item shelves
-may 04, 2019 4:46:26 PM cal3.LoggerThread write
-INFORMACIÓN: 3 people picking items from the item shelves
-may 04, 2019 4:46:26 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 13 waits at the checkout area
-may 04, 2019 4:46:26 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 24 enters the supermarket
-may 04, 2019 4:46:26 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 24 picks items from the item shelves
-may 04, 2019 4:46:26 PM cal3.LoggerThread write
-INFORMACIÓN: 4 people picking items from the item shelves
-may 04, 2019 4:46:26 PM cal3.LoggerThread write
+may 05, 2019 1:27:19 PM cal3.LoggerThread write
+INFORMACIÓN: Butcher attends Buyer 10
+may 05, 2019 1:27:19 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 9
+may 05, 2019 1:27:19 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 9 exits the supermarket
-may 04, 2019 4:46:26 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 12
-may 04, 2019 4:46:27 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 18 waits at the checkout area
-may 04, 2019 4:46:27 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 19
-may 04, 2019 4:46:27 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 25 enters the supermarket
-may 04, 2019 4:46:27 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 25 picks items from the item shelves
-may 04, 2019 4:46:27 PM cal3.LoggerThread write
-INFORMACIÓN: 5 people picking items from the item shelves
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 2 exits the supermarket
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 23
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 15 has finished picking items from the item shelves
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 12 enters the supermarket
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 12 waits at the fishmonger shop
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 13 enters the supermarket
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 13 picks items from the item shelves
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
 INFORMACIÓN: 4 people picking items from the item shelves
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 26 enters the supermarket
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 21 has finished picking items from the item shelves
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 5 has finished picking items from the item shelves
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
 INFORMACIÓN: 3 people picking items from the item shelves
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 26 waits at the fishmonger shop
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 12 exits the supermarket
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 19 waits at the checkout area
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 7 waits at the checkout area
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 21 waits at the checkout area
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Fishmonger attends Buyer 10
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 6
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 24 has finished picking items from the item shelves
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 20
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: 2 people picking items from the item shelves
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 15 waits at the checkout area
-may 04, 2019 4:46:31 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 24 waits at the checkout area
-may 04, 2019 4:46:32 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 27 enters the supermarket
-may 04, 2019 4:46:32 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 27 waits at the fishmonger shop
-may 04, 2019 4:46:32 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 14 has finished picking items from the item shelves
-may 04, 2019 4:46:32 PM cal3.LoggerThread write
-INFORMACIÓN: 1 people picking items from the item shelves
-may 04, 2019 4:46:32 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 14 waits at the checkout area
-may 04, 2019 4:46:32 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 28 enters the supermarket
-may 04, 2019 4:46:32 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 28 waits at the fishmonger shop
-may 04, 2019 4:46:33 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 23 waits at the checkout area
-may 04, 2019 4:46:34 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 20 exits the supermarket
-may 04, 2019 4:46:34 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 13
-may 04, 2019 4:46:34 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 29 enters the supermarket
-may 04, 2019 4:46:34 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 29 waits at the fishmonger shop
-may 04, 2019 4:46:35 PM cal3.LoggerThread write
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 5 waits at the checkout area
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 5
+may 05, 2019 1:27:20 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 5 exits the supermarket
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 14 enters the supermarket
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 14 waits at the butcher shop
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 4 waits at the checkout area
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 4
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 4 exits the supermarket
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: Fishmonger attends Buyer 6
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 15 enters the supermarket
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 15 picks items from the item shelves
+may 05, 2019 1:27:21 PM cal3.LoggerThread write
+INFORMACIÓN: 4 people picking items from the item shelves
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 16 enters the supermarket
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 16 waits at the butcher shop
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 17 enters the supermarket
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 17 waits at the fishmonger shop
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 10 waits at the checkout area
-may 04, 2019 4:46:35 PM cal3.LoggerThread write
-INFORMACIÓN: Fishmonger attends Buyer 11
-may 04, 2019 4:46:35 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 6 exits the supermarket
-may 04, 2019 4:46:35 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 18
-may 04, 2019 4:46:35 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 30 enters the supermarket
-may 04, 2019 4:46:35 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 30 waits at the butcher shop
-may 04, 2019 4:46:35 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 30
-may 04, 2019 4:46:37 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 30 waits at the checkout area
-may 04, 2019 4:46:37 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 13 exits the supermarket
-may 04, 2019 4:46:37 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 19
-may 04, 2019 4:46:37 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 31 enters the supermarket
-may 04, 2019 4:46:37 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 31 waits at the butcher shop
-may 04, 2019 4:46:37 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 31
-may 04, 2019 4:46:38 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 11 waits at the checkout area
-may 04, 2019 4:46:38 PM cal3.LoggerThread write
-INFORMACIÓN: Fishmonger attends Buyer 16
-may 04, 2019 4:46:39 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 25 has finished picking items from the item shelves
-may 04, 2019 4:46:39 PM cal3.LoggerThread write
-INFORMACIÓN: 0 people picking items from the item shelves
-may 04, 2019 4:46:39 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 25 waits at the checkout area
-may 04, 2019 4:46:39 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 18 exits the supermarket
-may 04, 2019 4:46:39 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 32 enters the supermarket
-may 04, 2019 4:46:39 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 32 waits at the fishmonger shop
-may 04, 2019 4:46:39 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 21
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 19 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 33 enters the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 33 waits at the butcher shop
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 15
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 39 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 32 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 38 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 28 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 37 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 27 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 34 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 17 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 35 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 22 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 36 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 29 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 26 exits the supermarket
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 31 waits at the checkout area
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Butcher attends Buyer 33
-may 04, 2019 4:46:40 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 40 exits the supermarket
-may 04, 2019 4:46:41 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 41 exits the supermarket
-may 04, 2019 4:46:41 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 42 exits the supermarket
-may 04, 2019 4:46:42 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 21 exits the supermarket
-may 04, 2019 4:46:42 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 7
-may 04, 2019 4:46:42 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 43 exits the supermarket
-may 04, 2019 4:46:42 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 15 exits the supermarket
-may 04, 2019 4:46:42 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 24
-may 04, 2019 4:46:43 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 44 exits the supermarket
-may 04, 2019 4:46:43 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 16 waits at the checkout area
-may 04, 2019 4:46:44 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 33 waits at the checkout area
-may 04, 2019 4:46:44 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 45 exits the supermarket
-may 04, 2019 4:46:44 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 46 exits the supermarket
-may 04, 2019 4:46:45 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 24 exits the supermarket
-may 04, 2019 4:46:45 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 14
-may 04, 2019 4:46:45 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 47 exits the supermarket
-may 04, 2019 4:46:46 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 48 exits the supermarket
-may 04, 2019 4:46:46 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 49 exits the supermarket
-may 04, 2019 4:46:46 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 7 exits the supermarket
-may 04, 2019 4:46:46 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 23
-may 04, 2019 4:46:47 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 14 exits the supermarket
-may 04, 2019 4:46:47 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 10
-may 04, 2019 4:46:47 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 50 exits the supermarket
-may 04, 2019 4:46:47 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 51 exits the supermarket
-may 04, 2019 4:46:48 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 52 exits the supermarket
-may 04, 2019 4:46:48 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 53 exits the supermarket
-may 04, 2019 4:46:48 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 54 exits the supermarket
-may 04, 2019 4:46:49 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 55 exits the supermarket
-may 04, 2019 4:46:49 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 56 exits the supermarket
-may 04, 2019 4:46:49 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 23 exits the supermarket
-may 04, 2019 4:46:49 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 30
-may 04, 2019 4:46:49 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 57 exits the supermarket
-may 04, 2019 4:46:50 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 58 exits the supermarket
-may 04, 2019 4:46:50 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 59 exits the supermarket
-may 04, 2019 4:46:50 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 60 exits the supermarket
-may 04, 2019 4:46:51 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 61 exits the supermarket
-may 04, 2019 4:46:51 PM cal3.LoggerThread write
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 10
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: Butcher attends Buyer 11
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 10 exits the supermarket
-may 04, 2019 4:46:51 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 11
-may 04, 2019 4:46:51 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 62 exits the supermarket
-may 04, 2019 4:46:51 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 30 exits the supermarket
-may 04, 2019 4:46:51 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 25
-may 04, 2019 4:46:52 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 63 exits the supermarket
-may 04, 2019 4:46:52 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 64 exits the supermarket
-may 04, 2019 4:46:53 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 65 exits the supermarket
-may 04, 2019 4:46:53 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 66 exits the supermarket
-may 04, 2019 4:46:54 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 67 exits the supermarket
-may 04, 2019 4:46:54 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 68 exits the supermarket
-may 04, 2019 4:46:54 PM cal3.LoggerThread write
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 18 enters the supermarket
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 18 picks items from the item shelves
+may 05, 2019 1:27:22 PM cal3.LoggerThread write
+INFORMACIÓN: 5 people picking items from the item shelves
+may 05, 2019 1:27:23 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 19 enters the supermarket
+may 05, 2019 1:27:23 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 19 waits at the fishmonger shop
+may 05, 2019 1:27:23 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 3 has finished picking items from the item shelves
+may 05, 2019 1:27:23 PM cal3.LoggerThread write
+INFORMACIÓN: 4 people picking items from the item shelves
+may 05, 2019 1:27:23 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 3 waits at the checkout area
+may 05, 2019 1:27:23 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 3
+may 05, 2019 1:27:23 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 3 exits the supermarket
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 2 has finished picking items from the item shelves
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: 3 people picking items from the item shelves
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 2 waits at the checkout area
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 2
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 2 exits the supermarket
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 20 enters the supermarket
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 20 waits at the butcher shop
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 21 enters the supermarket
+may 05, 2019 1:27:24 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 21 waits at the butcher shop
+may 05, 2019 1:27:25 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 15 has finished picking items from the item shelves
+may 05, 2019 1:27:25 PM cal3.LoggerThread write
+INFORMACIÓN: 2 people picking items from the item shelves
+may 05, 2019 1:27:25 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 15 waits at the checkout area
+may 05, 2019 1:27:25 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 15
+may 05, 2019 1:27:25 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 15 exits the supermarket
+may 05, 2019 1:27:25 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 22 enters the supermarket
+may 05, 2019 1:27:25 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 22 picks items from the item shelves
+may 05, 2019 1:27:25 PM cal3.LoggerThread write
+INFORMACIÓN: 3 people picking items from the item shelves
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 11 waits at the checkout area
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Butcher attends Buyer 14
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 11
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
 INFORMACIÓN: Buyer 11 exits the supermarket
-may 04, 2019 4:46:54 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 31
-may 04, 2019 4:46:55 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 69 exits the supermarket
-may 04, 2019 4:46:55 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 70 exits the supermarket
-may 04, 2019 4:46:56 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 25 exits the supermarket
-may 04, 2019 4:46:56 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 1 charges Buyer 16
-may 04, 2019 4:46:56 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 71 exits the supermarket
-may 04, 2019 4:46:57 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 72 exits the supermarket
-may 04, 2019 4:46:57 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 31 exits the supermarket
-may 04, 2019 4:46:57 PM cal3.LoggerThread write
-INFORMACIÓN: Cashier 2 charges Buyer 33
-may 04, 2019 4:46:57 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 73 exits the supermarket
-may 04, 2019 4:46:58 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 74 exits the supermarket
-may 04, 2019 4:46:59 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 75 exits the supermarket
-may 04, 2019 4:46:59 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 76 exits the supermarket
-may 04, 2019 4:47:00 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 77 exits the supermarket
-may 04, 2019 4:47:00 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 78 exits the supermarket
-may 04, 2019 4:47:01 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 16 exits the supermarket
-may 04, 2019 4:47:01 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 79 exits the supermarket
-may 04, 2019 4:47:01 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 80 exits the supermarket
-may 04, 2019 4:47:02 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 81 exits the supermarket
-may 04, 2019 4:47:02 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 33 exits the supermarket
-may 04, 2019 4:47:02 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 82 exits the supermarket
-may 04, 2019 4:47:03 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 83 exits the supermarket
-may 04, 2019 4:47:03 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 84 exits the supermarket
-may 04, 2019 4:47:03 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 85 exits the supermarket
-may 04, 2019 4:47:04 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 86 exits the supermarket
-may 04, 2019 4:47:05 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 87 exits the supermarket
-may 04, 2019 4:47:06 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 88 exits the supermarket
-may 04, 2019 4:47:07 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 89 exits the supermarket
-may 04, 2019 4:47:07 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 90 exits the supermarket
-may 04, 2019 4:47:08 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 91 exits the supermarket
-may 04, 2019 4:47:08 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 92 exits the supermarket
-may 04, 2019 4:47:09 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 93 exits the supermarket
-may 04, 2019 4:47:10 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 94 exits the supermarket
-may 04, 2019 4:47:10 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 95 exits the supermarket
-may 04, 2019 4:47:11 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 96 exits the supermarket
-may 04, 2019 4:47:11 PM cal3.LoggerThread write
-INFORMACIÓN: Buyer 97 exits the supermarket
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 6 waits at the checkout area
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 6
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 6 exits the supermarket
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Fishmonger attends Buyer 7
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 23 enters the supermarket
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 23 waits at the fishmonger shop
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 13 has finished picking items from the item shelves
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: 2 people picking items from the item shelves
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 13 waits at the checkout area
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Cashier 1 charges Buyer 13
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 13 exits the supermarket
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 24 enters the supermarket
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: Buyer 24 picks items from the item shelves
+may 05, 2019 1:27:26 PM cal3.LoggerThread write
+INFORMACIÓN: 3 people picking items from the item shelves

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Server.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CAL3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">cal3</a> &gt; <span class="el_source">Server.java</span></div><h1>Server.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cal3;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+/**
+ *
+ * @author Sergio
+ */
+public class Server extends Thread{
+    Monitor monitor;
+    public Server(Monitor monitor)
+<span class="fc" id="L20">    {</span>
+        ///this.goya = goya;
+<span class="fc" id="L22">        this.monitor = monitor;</span>
+<span class="fc" id="L23">        this.start();</span>
+<span class="fc" id="L24">    }</span>
+    
+    public void run(){
+        // TODO code application logic here
+        ServerSocket server;
+        Socket connection;
+        DataInputStream input;
+        DataOutputStream output;
+<span class="fc" id="L32">        int numConnections = 0;</span>
+        
+        try
+        {
+<span class="fc" id="L36">            server = new ServerSocket(5000);//To establish the server with a port</span>
+<span class="fc" id="L37">            System.out.println(&quot;--- Starting Server ---&quot;);</span>
+            while(true)
+            {
+<span class="nc" id="L40">                connection = server.accept();</span>
+<span class="nc" id="L41">                System.out.println(&quot;Connection number &quot; + numConnections);</span>
+                
+<span class="nc" id="L43">                input = new DataInputStream(connection.getInputStream());</span>
+<span class="nc" id="L44">                output = new DataOutputStream(connection.getOutputStream());</span>
+                
+<span class="nc" id="L46">                String message = input.readUTF();</span>
+<span class="nc" id="L47">                System.out.println(&quot;Message &quot; + message);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                if(message.equals(&quot;Operation: Stop Supermarket&quot;))</span>
+                {
+<span class="nc" id="L50">                    monitor.setStopThread(true);</span>
+<span class="nc" id="L51">                    output.writeUTF(&quot;OK&quot;);</span>
+                }
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                else if(message.equals(&quot;Operation: Resume Supermarket&quot;))</span>
+                {
+<span class="nc" id="L55">                    monitor.setStopThread(false);</span>
+<span class="nc" id="L56">                    monitor.activeThread();</span>
+<span class="nc" id="L57">                    output.writeUTF(&quot;OK&quot;);</span>
+                }
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                else if(message.equals(&quot;Operation: Stop Butcher&quot;))</span>
+                {
+<span class="nc" id="L61">                    monitor.setStopButcher(true);</span>
+<span class="nc" id="L62">                    output.writeUTF(&quot;OK&quot;);</span>
+                }
+<span class="nc bnc" id="L64" title="All 2 branches missed.">                else if(message.equals(&quot;Operation: Resume Butcher&quot;))</span>
+                {
+<span class="nc" id="L66">                    monitor.setStopButcher(false);</span>
+<span class="nc" id="L67">                    monitor.activeThread();</span>
+<span class="nc" id="L68">                    output.writeUTF(&quot;OK&quot;);</span>
+                }
+<span class="nc bnc" id="L70" title="All 2 branches missed.">                else if(message.equals(&quot;Operation: Stop Fishmonger&quot;))</span>
+                {
+<span class="nc" id="L72">                    monitor.setStopFishmonger(true);</span>
+<span class="nc" id="L73">                    output.writeUTF(&quot;OK&quot;);</span>
+                }
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                else if(message.equals(&quot;Operation: Resume Fishmonger&quot;))</span>
+                {
+<span class="nc" id="L77">                    monitor.setStopButcher(false);</span>
+<span class="nc" id="L78">                    monitor.activeThread();</span>
+<span class="nc" id="L79">                    output.writeUTF(&quot;OK&quot;);</span>
+                }
+                
+                else//To advice if a message received wasn't expected to be received
+                {
+<span class="nc" id="L84">                    output.writeUTF(&quot;Error&quot;);</span>
+                }
+<span class="nc" id="L86">                connection.close();</span>
+<span class="nc" id="L87">            }</span>
+        }
+<span class="nc" id="L89">        catch(Exception e)</span>
+        {
+            
+        }
+<span class="nc" id="L93">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

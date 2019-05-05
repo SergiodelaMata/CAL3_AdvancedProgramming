@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Fishmonger.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CAL3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">cal3</a> &gt; <span class="el_source">Fishmonger.java</span></div><h1>Fishmonger.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cal3;
+
+
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author Sergio
+ */
+public class Fishmonger extends Thread{
+    private int id;
+    private Monitor monitor;
+    private boolean free;
+    private String idBuyer;
+    private JTextField text;
+    
+    public Fishmonger(int id, Monitor monitor, JTextField text)
+<span class="fc" id="L23">    {</span>
+<span class="fc" id="L24">        this.id = id;</span>
+<span class="fc" id="L25">        this.monitor = monitor;</span>
+<span class="fc" id="L26">        this.free = true;</span>
+<span class="fc" id="L27">        this.idBuyer = &quot;&quot;;</span>
+<span class="fc" id="L28">        this.text = text;</span>
+<span class="fc" id="L29">    }</span>
+    
+    public void run()
+    {
+        while(true)
+        {
+<span class="nc bnc" id="L35" title="All 2 branches missed.">            if(monitor.isFishmongerWait())</span>
+            {
+<span class="nc" id="L37">                monitor.makeFishmongerWait();</span>
+            }
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            if(monitor.isStopFishmonger())</span>
+            {
+<span class="nc" id="L41">                monitor.waitButcher();</span>
+            }
+<span class="nc" id="L43">            buyFishmonger();</span>
+<span class="nc" id="L44">            monitor.setEndBuyingFish(false);</span>
+        }
+    }
+    
+    public synchronized void buyFishmonger()
+    {
+        try
+        {
+<span class="nc" id="L52">            monitor.setEndBuyingFish(true);</span>
+<span class="nc" id="L53">            monitor.setBuyerId(idBuyer, id);</span>
+<span class="nc" id="L54">            monitor.activeThread();</span>
+        }
+<span class="nc" id="L56">        catch(Exception e)</span>
+        {
+<span class="nc" id="L58">        }</span>
+<span class="nc" id="L59">    }</span>
+    
+    public int getIdFishmonger()
+    {
+<span class="nc" id="L63">        return id;</span>
+    }
+
+    public synchronized boolean isFree()
+    {
+<span class="fc" id="L68">        return free;</span>
+    }
+    
+    public synchronized void setFree(boolean free)
+    {
+<span class="fc" id="L73">        this.free = free;</span>
+<span class="fc" id="L74">    }</span>
+    
+    public String getIdBuyer() {
+<span class="fc" id="L77">        return idBuyer;</span>
+    }
+    
+    public synchronized void setIdBuyer(String idBuyer)
+    {
+<span class="fc" id="L82">        this.idBuyer = idBuyer;</span>
+<span class="fc" id="L83">    }</span>
+    
+    public synchronized void printShow(String idBuyer)
+    {
+<span class="fc" id="L87">        text.setText(idBuyer);</span>
+<span class="fc" id="L88">    }</span>
+    
+    public synchronized void printRemove()
+    {
+<span class="fc" id="L92">        text.setText(&quot;&quot;);</span>
+<span class="fc" id="L93">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

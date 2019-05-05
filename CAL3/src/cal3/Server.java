@@ -18,7 +18,6 @@ public class Server extends Thread{
     Monitor monitor;
     public Server(Monitor monitor)
     {
-        ///this.goya = goya;
         this.monitor = monitor;
         this.start();
     }

@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Supermarket.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;CAL3&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">cal3</a> &gt; <span class="el_source">Supermarket.java</span></div><h1>Supermarket.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cal3;
+
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author Sergio, Manuel
+ */
+public class Supermarket {
+    //private int maximumClientNumber;
+    private JTextField numberPeopleShelves;
+    private Monitor monitor;
+    private Semaphore semOutsideQueue, semButcherQueue, semFishmongerQueue, semCheckAreaQueue;
+    private Queue outsideQueue, butcherQueue, fishmongerQueue, itemShelvesQueue;
+    private CheckArea checkArea;
+    private Cashier cashier1, cashier2;
+    private Butcher butcher;
+    private Fishmonger fishmonger;
+    private Counter insideBuyerCounter, butcherAttendingCounter, fishmongerAttendingCounter, cashierAttendingCounter, counterBuyerEnter, counterBuyerExit, counterItemShelves, accumulationTimesButcher, accumulationTimesFishmonger;
+    private LoggerThread log;
+    private ArrayList&lt;Long&gt; timeServiceButcherList, timeWaitingButcherList, timeServiceFishmongerList, timeWaitingFishmongerList, timeEnterAndLeaveList, timeWaitOutsideQueueAndLeaveList;
+    
+    public Supermarket(JTextField buyerButcher,JTextField buyerFishmonger,JTextField butcherQueue, JTextField fishmongerQueue, JTextField buyersShelves, JTextField jTextFieldNumberPeopleShelves, JTextField buyerCashier1, JTextField buyerCashier2, JTextField checkAreaQueue, JTextField outsideQueueField,Monitor monitor, LoggerThread log)
+<span class="fc" id="L34">    {</span>
+<span class="fc" id="L35">        this.monitor = monitor;</span>
+<span class="fc" id="L36">        this.numberPeopleShelves = jTextFieldNumberPeopleShelves;</span>
+<span class="fc" id="L37">        this.butcherQueue = new Queue(butcherQueue, monitor);</span>
+<span class="fc" id="L38">        this.fishmongerQueue = new Queue(fishmongerQueue, monitor);</span>
+<span class="fc" id="L39">        this.outsideQueue = new Queue(outsideQueueField, monitor);</span>
+<span class="fc" id="L40">        this.itemShelvesQueue = new Queue(buyersShelves, monitor);</span>
+<span class="fc" id="L41">        this.checkArea = new CheckArea(monitor, checkAreaQueue);</span>
+<span class="fc" id="L42">        this.semOutsideQueue = new Semaphore(20, true);</span>
+<span class="fc" id="L43">        this.semButcherQueue = new Semaphore(1, true);</span>
+<span class="fc" id="L44">        this.semFishmongerQueue = new Semaphore(1, true);</span>
+<span class="fc" id="L45">        this.semCheckAreaQueue = new Semaphore(2, true);</span>
+<span class="fc" id="L46">        this.cashier1 = new Cashier(1, monitor, buyerCashier1);</span>
+<span class="fc" id="L47">        this.cashier2 = new Cashier(2, monitor, buyerCashier2);</span>
+<span class="fc" id="L48">        this.butcher = new Butcher(0, monitor, buyerButcher);</span>
+<span class="fc" id="L49">        this.fishmonger = new Fishmonger(3, monitor, buyerFishmonger);</span>
+<span class="fc" id="L50">        this.insideBuyerCounter = new Counter();</span>
+<span class="fc" id="L51">        this.butcherAttendingCounter = new Counter();</span>
+<span class="fc" id="L52">        this.fishmongerAttendingCounter = new Counter();</span>
+<span class="fc" id="L53">        this.cashierAttendingCounter = new Counter();</span>
+<span class="fc" id="L54">        this.counterItemShelves = new Counter();</span>
+<span class="fc" id="L55">        this.counterItemShelves.setCounter(0, this.numberPeopleShelves);</span>
+<span class="fc" id="L56">        this.counterBuyerEnter = new Counter();</span>
+<span class="fc" id="L57">        this.counterBuyerExit = new Counter();</span>
+<span class="fc" id="L58">        this.accumulationTimesButcher = new Counter();</span>
+<span class="fc" id="L59">        this.accumulationTimesFishmonger = new Counter();</span>
+<span class="fc" id="L60">        this.log = log;</span>
+<span class="fc" id="L61">        this.timeServiceButcherList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L62">        this.timeServiceFishmongerList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L63">        this.timeWaitingButcherList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L64">        this.timeWaitingFishmongerList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L65">        this.timeEnterAndLeaveList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L66">        this.timeWaitOutsideQueueAndLeaveList = new ArrayList&lt;&gt;();</span>
+        //this.maximumClientNumber = maximumClientNumber;
+        
+<span class="fc" id="L69">    }</span>
+    
+    /**public void shopping(String idBuyer)
+    {
+        int randNumber;
+        boolean attended = false;
+        enterSupermarket(idBuyer);
+        lock.lock();
+        try {
+            randNumber = (int) (Math.random()*3);
+        } finally {
+            lock.unlock();
+        }
+        if(!monitor.isComplete())
+        {
+            switch (randNumber) {
+                case 0:
+                    //goButcherShop(idBuyer);
+                    attended = buyButcher(idBuyer);
+                    break;
+                case 1:
+                    //goFishmongerShop(idBuyer);
+                    attended = buyFishmonger(idBuyer);
+                    break;
+                default:
+                    goItemShelves(idBuyer);
+                    attended = true;
+                    break;
+            }
+        }
+        if(attended)
+        {
+            payShopping(idBuyer);
+        }    
+        exitSupermarket(idBuyer);
+        
+    }*/
+    
+    public void enterOutsideQueue(String idBuyer)
+    {
+<span class="fc" id="L109">        outsideQueue.push(idBuyer);</span>
+<span class="fc" id="L110">        monitor.waitIfDifferentIdBuyerEnterSupermarket(idBuyer, outsideQueue, insideBuyerCounter);</span>
+<span class="fc" id="L111">    }</span>
+    
+    
+    public void enterSupermarket(String idBuyer)
+    {
+        //outsideQueue.push(idBuyer);
+        try
+        {
+            
+            //System.out.println(&quot;hola 1&quot;);
+            //monitor.waitIfDifferentIdBuyerEnterSupermarket(idBuyer, outsideQueue, insideBuyerCounter);
+            //if(!monitor.isComplete())
+            //{
+<span class="fc" id="L124">                semOutsideQueue.acquire();</span>
+<span class="fc" id="L125">                insideBuyerCounter.setCounter(insideBuyerCounter.getCounter()+1);</span>
+<span class="fc" id="L126">                counterBuyerEnter.setCounter(counterBuyerEnter.getCounter()+1);</span>
+                //System.out.println(&quot;hola 2 &quot; + idBuyer);
+<span class="fc bfc" id="L128" title="All 2 branches covered.">                if(monitor.isStopThread())</span>
+                {
+<span class="fc" id="L130">                    monitor.waitResume();</span>
+                }
+<span class="fc" id="L132">                outsideQueue.pop(idBuyer);</span>
+<span class="fc" id="L133">                System.out.println(idBuyer + &quot; enters the supermarket&quot;);</span>
+<span class="fc" id="L134">                log.log(idBuyer + &quot; enters the supermarket&quot;);</span>
+<span class="fc" id="L135">                monitor.activeThread();</span>
+                //System.out.println(&quot;hola 3 &quot; + idBuyer);
+            //}
+            //else
+            //{
+            //    outsideQueue.pop(idBuyer);
+            //}
+        }
+<span class="nc" id="L143">        catch(Exception e)</span>
+<span class="fc" id="L144">        {}</span>
+        
+        //System.out.println(idBuyer);
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">        if(monitor.isStopThread())</span>
+        {
+<span class="nc" id="L149">            monitor.waitResume();</span>
+        }
+<span class="fc" id="L151">    }</span>
+    
+    public void exitSupermarket(String idBuyer)
+    {
+        
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">        if(monitor.isStopThread())</span>
+        {
+<span class="nc" id="L158">            monitor.waitResume();</span>
+        }
+<span class="fc" id="L160">        System.out.println(idBuyer + &quot; exits the supermarket&quot;);</span>
+<span class="fc" id="L161">        log.log(idBuyer + &quot; exits the supermarket&quot;);</span>
+<span class="fc" id="L162">        insideBuyerCounter.setCounter(insideBuyerCounter.getCounter()-1);//May need to be changed</span>
+<span class="fc bfc" id="L163" title="All 2 branches covered.">        if(!monitor.isComplete())</span>
+        {
+<span class="fc" id="L165">            semOutsideQueue.release();</span>
+        }
+<span class="fc" id="L167">        counterBuyerExit.setCounter(counterBuyerExit.getCounter()+1);</span>
+<span class="fc" id="L168">        monitor.activeThread();</span>
+        /**if(counterBuyerExit.getCounter() &gt;= maximumClientNumber)
+        {
+            log.log(&quot;Butcher shop average service time: &quot; + counterServiceTime(timeServiceButcherList) + &quot;ms&quot;);
+            log.log(&quot;Fish shop average service time: &quot; + counterServiceTime(timeServiceFishmongerList) + &quot;ms&quot;);
+            log.log(&quot;Total number of people who have entered the supermarket: &quot; + counterBuyerEnter.getCounter());
+            log.log(&quot;Total number of people who have left the supermarket: &quot; + counterBuyerExit.getCounter());
+        }*/
+<span class="fc" id="L176">    }</span>
+    
+    public void payShopping(String idBuyer)
+    {
+<span class="fc" id="L180">        checkArea.push(idBuyer);</span>
+<span class="fc" id="L181">        log.log(idBuyer + &quot; waits at the checkout area&quot;);</span>
+        try
+        {
+            //sleep(2000);
+<span class="fc" id="L185">            monitor.waitIfDifferentIdBuyerEnterCashier(idBuyer, checkArea.getPayQueue(), cashierAttendingCounter);</span>
+<span class="fc" id="L186">            semCheckAreaQueue.acquire();</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">            if(monitor.isStopThread())</span>
+            {
+<span class="nc" id="L189">                monitor.waitResume();</span>
+            }
+<span class="fc" id="L191">            checkArea.pop(idBuyer);</span>
+<span class="fc" id="L192">            cashierAttendingCounter.setCounter(cashierAttendingCounter.getCounter()+1);</span>
+<span class="fc" id="L193">            monitor.activeThread();</span>
+<span class="fc bfc" id="L194" title="All 2 branches covered.">            if(cashier1.isFree())</span>
+            {
+<span class="fc" id="L196">                cashier1.setFree(false);</span>
+<span class="fc" id="L197">                cashier1.setIdBuyer(idBuyer);</span>
+<span class="fc" id="L198">                cashier1.printShow(idBuyer);</span>
+            }
+<span class="pc bpc" id="L200" title="1 of 2 branches missed.">            else if(cashier2.isFree())</span>
+            {
+<span class="fc" id="L202">                cashier2.setFree(false);</span>
+<span class="fc" id="L203">                cashier2.setIdBuyer(idBuyer);</span>
+<span class="fc" id="L204">                cashier2.printShow(idBuyer);</span>
+            }
+<span class="pc bpc" id="L206" title="1 of 2 branches missed.">            if(monitor.isStopThread())</span>
+            {
+<span class="nc" id="L208">                monitor.waitResume();</span>
+            }
+            
+<span class="fc bfc" id="L211" title="All 2 branches covered.">            if(monitor.isCashierWait())</span>
+            {
+<span class="fc" id="L213">                monitor.setCashierWait(false);</span>
+                
+<span class="fc bfc" id="L215" title="All 2 branches covered.">                if(checkArea.lengthCheckArea() == 0)</span>
+                {
+<span class="fc" id="L217">                    monitor.activeThread();</span>
+<span class="fc" id="L218">                    monitor.setCashierWait(true);</span>
+                }
+                else
+                {
+<span class="fc" id="L222">                    monitor.activeThread();</span>
+                }
+                
+            }
+            else
+            {
+<span class="fc bfc" id="L228" title="All 2 branches covered.">                if(checkArea.lengthCheckArea() == 0)</span>
+                {
+<span class="fc" id="L230">                    monitor.setCashierWait(true);</span>
+                }
+            }
+<span class="pc bpc" id="L233" title="1 of 2 branches missed.">            if(monitor.isStopThread())</span>
+            {
+<span class="nc" id="L235">                monitor.waitResume();</span>
+            }
+<span class="fc bfc" id="L237" title="All 2 branches covered.">            if(cashier1.getIdBuyer().equals(idBuyer))</span>
+            {
+<span class="fc" id="L239">                log.log(&quot;Cashier 1 charges &quot; + idBuyer);</span>
+<span class="fc" id="L240">                sleep((long)(Math.random()*3000 + 2000));</span>
+<span class="fc" id="L241">                monitor.waitEndBuying(idBuyer, cashier1.getIdCashier());</span>
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">                if(monitor.isStopThread())</span>
+                {
+<span class="nc" id="L244">                    monitor.waitResume();</span>
+                }
+<span class="fc" id="L246">                cashier1.printRemove();</span>
+<span class="fc" id="L247">                cashier1.setFree(true);</span>
+<span class="fc" id="L248">                cashier1.setIdBuyer(&quot;&quot;);</span>
+                //System.out.println(&quot;Cashier 1: &quot; + cashier1.isFree());
+            }
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">            else if(cashier2.getIdBuyer().equals(idBuyer))</span>
+            {
+<span class="fc" id="L253">                log.log(&quot;Cashier 2 charges &quot; + idBuyer);</span>
+<span class="fc" id="L254">                sleep((long)(Math.random()*3000 + 2000));</span>
+<span class="fc" id="L255">                monitor.waitEndBuying(idBuyer, cashier2.getIdCashier());</span>
+<span class="pc bpc" id="L256" title="1 of 2 branches missed.">                if(monitor.isStopThread())</span>
+                {
+<span class="nc" id="L258">                    monitor.waitResume();</span>
+                }
+<span class="fc" id="L260">                cashier2.printRemove();</span>
+<span class="fc" id="L261">                cashier2.setFree(true);</span>
+<span class="fc" id="L262">                cashier2.setIdBuyer(&quot;&quot;);</span>
+                //System.out.println(&quot;Cashier 2: &quot; + cashier2.isFree());
+            }
+            
+        }
+<span class="nc" id="L267">        catch(Exception e)</span>
+<span class="fc" id="L268">        {}</span>
+<span class="fc" id="L269">        cashierAttendingCounter.setCounter(cashierAttendingCounter.getCounter()-1);</span>
+<span class="fc" id="L270">        monitor.activeThread();</span>
+        //System.out.println(idBuyer + &quot; finished buying&quot;);
+<span class="fc" id="L272">        semCheckAreaQueue.release();</span>
+<span class="fc" id="L273">    }</span>
+    
+    /**public void goButcherShop(String idBuyer)// Enter butcher´s
+	{
+		butcherQueue.push(idBuyer);
+                log.log(idBuyer + &quot; waits at the butcher shop&quot;);
+		if (monitor.isStopThread()) {
+			monitor.waitResume();
+		}
+		// System.out.println(idBuyer + &quot; Butcher&quot;);
+		butcherQueue.remove(idBuyer);
+	}*/
+    
+    public boolean buyButcher(String idBuyer) {
+<span class="fc" id="L287">        boolean attended = false;</span>
+        long randNumber;
+<span class="fc" id="L289">        butcherQueue.push(idBuyer);</span>
+<span class="fc" id="L290">        System.out.println(idBuyer + &quot; waits at the butcher shop&quot;);</span>
+<span class="fc" id="L291">        log.log(idBuyer + &quot; waits at the butcher shop&quot;);</span>
+<span class="fc" id="L292">        monitor.waitIfDifferentIdBuyerButcher(idBuyer, butcherQueue, butcherAttendingCounter);</span>
+<span class="fc bfc" id="L293" title="All 2 branches covered.">        if(!monitor.isComplete())</span>
+        {
+            try {
+<span class="fc" id="L296">                semButcherQueue.acquire();</span>
+<span class="pc bpc" id="L297" title="1 of 2 branches missed.">                if (monitor.isStopThread())</span>
+                {
+<span class="nc" id="L299">                    monitor.waitResume();</span>
+                }
+<span class="fc" id="L301">                butcherQueue.pop(idBuyer);</span>
+<span class="fc" id="L302">                butcherAttendingCounter.setCounter(butcherAttendingCounter.getCounter() + 1);</span>
+<span class="fc" id="L303">                monitor.activeThread();</span>
+<span class="fc" id="L304">                attended = true;</span>
+<span class="pc bpc" id="L305" title="1 of 2 branches missed.">                if (butcher.isFree())</span>
+                {
+<span class="fc" id="L307">                    butcher.setFree(false);</span>
+<span class="fc" id="L308">                    butcher.setIdBuyer(idBuyer);</span>
+<span class="fc" id="L309">                    butcher.printShow(idBuyer);</span>
+                }
+<span class="pc bpc" id="L311" title="1 of 2 branches missed.">                if (monitor.isButcherWait())</span>
+                {
+<span class="fc" id="L313">                    monitor.setButcherWait(false);</span>
+<span class="fc" id="L314">                    monitor.activeThread();</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">                    if(butcherQueue.lengthQueue() == 0)</span>
+                    {
+<span class="fc" id="L317">                        monitor.setButcherWait(true);</span>
+                    }
+                    else
+                    {
+<span class="fc" id="L321">                        accumulationTimesButcher.setCounter(accumulationTimesButcher.getCounter()+1);</span>
+                    }
+                }
+                else
+                {
+<span class="nc bnc" id="L326" title="All 2 branches missed.">                    if(butcherQueue.lengthQueue() == 0)</span>
+                    {
+<span class="nc" id="L328">                        monitor.setButcherWait(true);</span>
+                    }
+                    else
+                    {
+<span class="nc" id="L332">                        accumulationTimesButcher.setCounter(accumulationTimesButcher.getCounter()+1);</span>
+                    }
+                }
+<span class="pc bpc" id="L335" title="1 of 2 branches missed.">                if(monitor.isStopButcher())</span>
+                {
+<span class="nc" id="L337">                    monitor.waitButcher();</span>
+                }
+<span class="pc bpc" id="L339" title="1 of 2 branches missed.">                if (monitor.isStopThread())</span>
+                {
+<span class="nc" id="L341">                    monitor.waitResume();</span>
+                }
+<span class="pc bpc" id="L343" title="1 of 2 branches missed.">                if(monitor.isStopButcher())</span>
+                {
+<span class="nc" id="L345">                    monitor.waitButcher();</span>
+                }
+<span class="pc bpc" id="L347" title="1 of 2 branches missed.">                if (butcher.getIdBuyer().equals(idBuyer))</span>
+                {
+<span class="fc" id="L349">                    System.out.println(&quot;Butcher attends &quot; + idBuyer);</span>
+<span class="fc" id="L350">                    log.log(&quot;Butcher attends &quot; + idBuyer);</span>
+<span class="fc" id="L351">                    randNumber = (long) (Math.random() * 2500 + 1500);</span>
+<span class="fc" id="L352">                    timeServiceButcherList.add(randNumber);</span>
+<span class="fc" id="L353">                    sleep(randNumber);</span>
+<span class="fc" id="L354">                    monitor.waitBuyingMeat();</span>
+<span class="pc bpc" id="L355" title="1 of 2 branches missed.">                    if(monitor.isStopButcher())</span>
+                    {
+<span class="nc" id="L357">                        monitor.waitButcher();</span>
+                    }
+<span class="pc bpc" id="L359" title="1 of 2 branches missed.">                    if(monitor.isStopThread())</span>
+                    {
+<span class="nc" id="L361">                        monitor.waitResume();</span>
+                    }
+<span class="pc bpc" id="L363" title="1 of 2 branches missed.">                    if(monitor.isStopButcher())</span>
+                    {
+<span class="nc" id="L365">                        monitor.waitButcher();</span>
+                    }
+<span class="fc" id="L367">                    butcher.printRemove();</span>
+<span class="fc" id="L368">                    butcher.setFree(true);</span>
+<span class="fc" id="L369">                    butcher.setIdBuyer(&quot;&quot;);</span>
+                }
+<span class="nc" id="L371">            } catch (Exception e)</span>
+<span class="fc" id="L372">            {}</span>
+<span class="pc bpc" id="L373" title="1 of 2 branches missed.">            if (monitor.isStopThread())</span>
+            {
+<span class="nc" id="L375">                monitor.waitResume();</span>
+            }
+<span class="fc" id="L377">            butcherAttendingCounter.setCounter(butcherAttendingCounter.getCounter() - 1);</span>
+<span class="fc" id="L378">            monitor.activeThread();</span>
+<span class="fc" id="L379">            semButcherQueue.release();</span>
+        }
+        else
+        {
+<span class="fc" id="L383">            butcherQueue.pop(idBuyer);</span>
+        }
+<span class="fc" id="L385">        return attended;</span>
+    }
+    
+    /**public void goFishmongerShop(String idBuyer)// Enter fishmonger´s
+    {
+        fishmongerQueue.push(idBuyer);
+        log.log(idBuyer + &quot; waits at the fishmonger shop&quot;);
+        if (monitor.isStopThread()) {
+            monitor.waitResume();
+        }
+        fishmongerQueue.remove(idBuyer);
+    }*/
+    
+    public boolean buyFishmonger(String idBuyer)
+    {
+<span class="fc" id="L400">        boolean attended = false;</span>
+        long randNumber;
+<span class="fc" id="L402">        fishmongerQueue.push(idBuyer);</span>
+<span class="fc" id="L403">        System.out.println(idBuyer + &quot; waits at the fishmonger shop&quot;);</span>
+<span class="fc" id="L404">        log.log(idBuyer + &quot; waits at the fishmonger shop&quot;);</span>
+<span class="fc" id="L405">        monitor.waitIfDifferentIdBuyerEnterFishmonger(idBuyer, fishmongerQueue, fishmongerAttendingCounter);</span>
+<span class="pc bpc" id="L406" title="1 of 2 branches missed.">        if(!monitor.isComplete())</span>
+        {
+            try {
+<span class="fc" id="L409">                semFishmongerQueue.acquire();</span>
+<span class="pc bpc" id="L410" title="1 of 2 branches missed.">                if (monitor.isStopThread()) {</span>
+<span class="nc" id="L411">                    monitor.waitResume();</span>
+                }
+<span class="fc" id="L413">                fishmongerQueue.pop(idBuyer);</span>
+<span class="fc" id="L414">                fishmongerAttendingCounter.setCounter(fishmongerAttendingCounter.getCounter() + 1);</span>
+<span class="fc" id="L415">                monitor.activeThread();</span>
+<span class="fc" id="L416">                attended = true;</span>
+<span class="pc bpc" id="L417" title="1 of 2 branches missed.">                if (fishmonger.isFree())</span>
+                {
+<span class="fc" id="L419">                    fishmonger.setFree(false);</span>
+<span class="fc" id="L420">                    fishmonger.setIdBuyer(idBuyer);</span>
+<span class="fc" id="L421">                    fishmonger.printShow(idBuyer);</span>
+                }
+<span class="pc bpc" id="L423" title="1 of 2 branches missed.">                if (monitor.isFishmongerWait())</span>
+                {
+<span class="fc" id="L425">                    monitor.setFishmongerWait(false);</span>
+<span class="fc" id="L426">                    monitor.activeThread();</span>
+<span class="pc bpc" id="L427" title="1 of 2 branches missed.">                    if(fishmongerQueue.lengthQueue() == 0)</span>
+                    {
+<span class="fc" id="L429">                        monitor.setFishmongerWait(true);</span>
+                    }
+                    else
+                    {
+<span class="nc" id="L433">                        accumulationTimesFishmonger.setCounter(accumulationTimesFishmonger.getCounter()+1);</span>
+                    }
+                }
+                else
+                {
+<span class="nc bnc" id="L438" title="All 2 branches missed.">                    if(fishmongerQueue.lengthQueue() == 0)</span>
+                    {
+<span class="nc" id="L440">                        monitor.setFishmongerWait(true);</span>
+                    }
+                    else
+                    {
+<span class="nc" id="L444">                        accumulationTimesFishmonger.setCounter(accumulationTimesFishmonger.getCounter()+1);</span>
+                    }
+                }
+<span class="pc bpc" id="L447" title="1 of 2 branches missed.">                if(monitor.isStopFishmonger())</span>
+                {
+<span class="nc" id="L449">                    monitor.waitButcher();</span>
+                }
+<span class="pc bpc" id="L451" title="1 of 2 branches missed.">                if (monitor.isStopThread())</span>
+                {
+<span class="nc" id="L453">                    monitor.waitResume();</span>
+                }
+<span class="pc bpc" id="L455" title="1 of 2 branches missed.">                if(monitor.isStopFishmonger())</span>
+                {
+<span class="nc" id="L457">                    monitor.waitButcher();</span>
+                }
+<span class="pc bpc" id="L459" title="1 of 2 branches missed.">                if (fishmonger.getIdBuyer().equals(idBuyer))</span>
+                {
+<span class="fc" id="L461">                    System.out.println(&quot;Fishmonger attends &quot; + idBuyer);</span>
+<span class="fc" id="L462">                    log.log(&quot;Fishmonger attends &quot; + idBuyer);</span>
+<span class="fc" id="L463">                    randNumber = (long) (Math.random() * 2000 + 3000);</span>
+<span class="fc" id="L464">                    timeServiceFishmongerList.add(randNumber);</span>
+<span class="fc" id="L465">                    sleep(randNumber);</span>
+<span class="fc" id="L466">                    monitor.waitBuyingFish();</span>
+<span class="pc bpc" id="L467" title="1 of 2 branches missed.">                    if(monitor.isStopFishmonger())</span>
+                    {
+<span class="nc" id="L469">                        monitor.waitButcher();</span>
+                    }
+<span class="fc bfc" id="L471" title="All 2 branches covered.">                    if(monitor.isStopThread())</span>
+                    {
+<span class="fc" id="L473">                        monitor.waitResume();</span>
+                    }
+<span class="pc bpc" id="L475" title="1 of 2 branches missed.">                    if(monitor.isStopFishmonger())</span>
+                    {
+<span class="nc" id="L477">                        monitor.waitButcher();</span>
+                    }
+<span class="fc" id="L479">                    fishmonger.printRemove();</span>
+<span class="fc" id="L480">                    fishmonger.setFree(true);</span>
+<span class="fc" id="L481">                    fishmonger.setIdBuyer(&quot;&quot;);</span>
+                }
+<span class="nc" id="L483">            } catch (Exception e)</span>
+<span class="fc" id="L484">            {}</span>
+<span class="pc bpc" id="L485" title="1 of 2 branches missed.">            if (monitor.isStopThread())</span>
+            {
+<span class="nc" id="L487">                monitor.waitResume();</span>
+            }
+<span class="fc" id="L489">            fishmongerAttendingCounter.setCounter(fishmongerAttendingCounter.getCounter() - 1);</span>
+<span class="fc" id="L490">            monitor.activeThread();</span>
+<span class="fc" id="L491">            semFishmongerQueue.release();</span>
+        }
+        else
+        {
+<span class="nc" id="L495">            fishmongerQueue.pop(idBuyer);</span>
+        }
+<span class="fc" id="L497">        return attended;</span>
+    }
+    
+    public void goItemShelves(String idBuyer)
+    {
+<span class="fc" id="L502">        itemShelvesQueue.push(idBuyer);</span>
+        try {
+<span class="fc" id="L504">            counterItemShelves.setCounter(counterItemShelves.getCounter()+1, numberPeopleShelves);</span>
+<span class="fc" id="L505">            System.out.println(idBuyer + &quot; picks items from the item shelves&quot;);</span>
+<span class="fc" id="L506">            log.log(idBuyer + &quot; picks items from the item shelves&quot;);</span>
+<span class="fc" id="L507">            log.log(counterItemShelves.getCounter() + &quot; people picking items from the item shelves&quot;);</span>
+<span class="fc" id="L508">            sleep((long)(Math.random()*11000 + 1000));</span>
+<span class="nc" id="L509">        } catch (InterruptedException ex) {</span>
+<span class="nc" id="L510">            Logger.getLogger(Supermarket.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="fc" id="L511">        }</span>
+<span class="fc bfc" id="L512" title="All 2 branches covered.">        if(monitor.isStopThread())</span>
+        {
+<span class="fc" id="L514">            monitor.waitResume();</span>
+        }
+<span class="fc" id="L516">        itemShelvesQueue.remove(idBuyer);</span>
+<span class="fc" id="L517">        counterItemShelves.setCounter(counterItemShelves.getCounter()-1, numberPeopleShelves);</span>
+<span class="fc" id="L518">        log.log(idBuyer + &quot; has finished picking items from the item shelves&quot;);</span>
+<span class="fc" id="L519">        log.log(counterItemShelves.getCounter() + &quot; people picking items from the item shelves&quot;);</span>
+        //System.out.println(idBuyer + &quot; Items&quot;);
+<span class="fc" id="L521">    }</span>
+    
+    public long counterAverageServiceTime(ArrayList&lt;Long&gt; timeList)
+    {
+<span class="nc" id="L525">        long sum = 0;</span>
+<span class="nc" id="L526">        long average = 0;</span>
+<span class="nc bnc" id="L527" title="All 2 branches missed.">        if(timeList.size() != 0)</span>
+        {
+<span class="nc bnc" id="L529" title="All 2 branches missed.">            for(int i = 0; i &lt; timeList.size(); i++)</span>
+            {
+<span class="nc" id="L531">                sum += timeList.get(i);</span>
+            }
+<span class="nc" id="L533">            average = sum / timeList.size();</span>
+        }
+<span class="nc" id="L535">        return average;</span>
+        
+    }
+    
+    public void goOutOutsideQueue(String idBuyer)
+    {
+<span class="fc" id="L541">        outsideQueue.pop(idBuyer);</span>
+<span class="fc" id="L542">    }</span>
+    
+    public void addEnterAndLeaveTime(long average)
+    {
+<span class="fc" id="L546">        timeEnterAndLeaveList.add(average);</span>
+<span class="fc" id="L547">    }</span>
+    
+    public void addWaitOutsideQueueAndLeaveTime(long average)
+    {
+<span class="fc" id="L551">        timeWaitOutsideQueueAndLeaveList.add(average);</span>
+<span class="fc" id="L552">    }</span>
+
+    public ArrayList&lt;Long&gt; getTimeEnterAndLeaveList() {
+<span class="nc" id="L555">        return timeEnterAndLeaveList;</span>
+    }
+
+    public ArrayList&lt;Long&gt; getTimeWaitOutsideQueueAndLeaveList() {
+<span class="nc" id="L559">        return timeWaitOutsideQueueAndLeaveList;</span>
+    }
+
+    public Counter getCounterBuyerExit() {
+<span class="fc" id="L563">        return counterBuyerExit;</span>
+    }
+
+    public Counter getCounterBuyerEnter() {
+<span class="nc" id="L567">        return counterBuyerEnter;</span>
+    }
+
+    public ArrayList&lt;Long&gt; getTimeServiceButcherList() {
+<span class="nc" id="L571">        return timeServiceButcherList;</span>
+    }
+
+    public ArrayList&lt;Long&gt; getTimeServiceFishmongerList() {
+<span class="nc" id="L575">        return timeServiceFishmongerList;</span>
+    }
+
+    public Counter getAccumulationTimesButcher() {
+<span class="nc" id="L579">        return accumulationTimesButcher;</span>
+    }
+
+    public Counter getAccumulationTimesFishmonger() {
+<span class="nc" id="L583">        return accumulationTimesFishmonger;</span>
+    }
+    
+    
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

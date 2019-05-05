@@ -314,16 +314,6 @@ public class Supermarket {
         return attended;
     }
     
-    /**public void goFishmongerShop(String idBuyer)// Enter fishmonger´s
-    {
-        fishmongerQueue.push(idBuyer);
-        log.log(idBuyer + " waits at the fishmonger shop");
-        if (monitor.isStopThread()) {
-            monitor.waitResume();
-        }
-        fishmongerQueue.remove(idBuyer);
-    }*/
-    
     public boolean buyFishmonger(String idBuyer)
     {
         boolean attended = false;
